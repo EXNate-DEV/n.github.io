@@ -141,7 +141,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 	}
 	CServices.formatDiscName = function (number, extension)
 	{
-		var s = number.toString();
+		var s = `${number}`;
 		while (s.length < 4)
 			s = '0' + s;
 		s += '.' + extension;
@@ -24327,10 +24327,12 @@ window['Runtime'] = (function Runtime(__can, __path){
 							if ((pHox.ros.rsFlags & CRSpr.RSFLAG_COLBOX) == 0)
 							{
 								var image = this.rhApp.imageBank.getImageFromHandle(pHox.roc.rcImage);
-								var mask = image.getMask(CMask.GCMF_OBSTACLE, 0, 1.0, 1.0);
+								if (image != null) {
+									var mask = image.getMask(CMask.GCMF_OBSTACLE, 0, 1.0, 1.0);
 								if (mask.testPointEx(this.rh2MouseX - pHox.hoX, this.rh2MouseY - pHox.hoY, pHox.roc.rcAngle, pHox.roc.rcScaleX, pHox.roc.rcScaleY))
 								{
 									list.add(pHox);
+								}
 								}
 							}
 							else
