@@ -84,7 +84,21 @@ b {
 		const gameData = {
 			"FNAF2": [
 				"Five Nights At Freddy's 2",
-				"The second game of the FNAF series."
+				"The second game of the FNAF series.",
+				function() {
+					location.pathname = "/"
+				}
+			],
+			"FNAF3": [
+				"Five Nights At Freddy's 3",
+				"The third game of the FNAF series.",
+				function() {
+					location.pathname = "/"
+				}
+			],
+			"FNAF4": [
+				"Five Nights At Freddy's 4",
+				"The fourth game of the FNAF series."
 			]
 		}
         const search = new URLSearchParams(location.search)
@@ -94,6 +108,9 @@ b {
             document.getElementById("MMFCanvas").src = "/go/" + gamename
 			document.getElementById("GameTitle").innerText = data[0]
 			document.getElementById("GameDescription").innerText = data[1]
+			if (data[2]) {
+				data[2]()
+			}
         }
 
     </script>
