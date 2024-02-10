@@ -33912,8 +33912,13 @@ window['Runtime'] = (function Runtime(__can, __path){
 			if (this.type == 1)
 			{
 				this.imageUsed = this.app.imageBank.getImageFromHandle(this.poi.oiOC.ocImage);
-				this.width = this.imageUsed.width;
-	            this.height = this.imageUsed.height;
+				if (this.imageUsed != null) {
+					this.width = this.imageUsed.width;
+	            	this.height = this.imageUsed.height;
+				} else {
+					this.width = 64;
+	            	this.height = 64;
+				}
 			}
 			else if (this.type >= 32)
 			{
@@ -34104,7 +34109,9 @@ window['Runtime'] = (function Runtime(__can, __path){
 				}
 				else if (this.type == COI.OBJ_BKD)
 				{
-				    context.renderImage(this.imageUsed, xx + this.x + this.imageUsed.xSpot, yy + this.y + this.imageUsed.ySpot, 0, 1.0, 1.0, this.effect, this.effectParam);
+				    if (this.imageUsed != null) {
+						context.renderImage(this.imageUsed, xx + this.x + this.imageUsed.xSpot, yy + this.y + this.imageUsed.ySpot, 0, 1.0, 1.0, this.effect, this.effectParam);
+					}
 				}
 				else
 				{
