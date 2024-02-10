@@ -144,7 +144,8 @@ window['Runtime'] = (function Runtime(__can, __path){
 	CServices.formatDiscName = function (number, extension)
 	{
 		var s = `${number}`;
-		s = s.padStart(4, "0");
+		while (s.length < 4)
+			s = '0' + s;
 		s += '.' + extension;
 		return s;
 	}
@@ -19826,23 +19827,13 @@ window['Runtime'] = (function Runtime(__can, __path){
 					this.dataToDecode.removeIndex(0);
 					this.decoding = true;
 					var that = this;
-					
-					try {
-						that.context.decodeAudioData(cSound.response, function (buffer)
-						{
-							cSound.buffer = buffer;
-							cSound.response = null;
-							that.app.dataHasLoaded(cSound);
-							that.decoding = false;
-						}, function() {
-							that.app.dataHasLoaded(cSound);
-							that.decoding = false;
-						});
-					} catch (error) {
-						console.log(typeof(cSound.response))
+					that.context["decodeAudioData"](cSound.response, function (buffer)
+					{
+						cSound.buffer = buffer;
+						cSound.response = null;
 						that.app.dataHasLoaded(cSound);
 						that.decoding = false;
-					}
+					});
 				}
 			}
 		},
@@ -24338,9 +24329,13 @@ window['Runtime'] = (function Runtime(__can, __path){
 							if ((pHox.ros.rsFlags & CRSpr.RSFLAG_COLBOX) == 0)
 							{
 								var image = this.rhApp.imageBank.getImageFromHandle(pHox.roc.rcImage);
-								var mask = image.getMask(CMask.GCMF_OBSTACLE, 0, 1.0, 1.0);
+								if (image != null) {
+									var mask = image.getMask(CMask.GCMF_OBSTACLE, 0, 1.0, 1.0);
 								if (mask.testPointEx(this.rh2MouseX - pHox.hoX, this.rh2MouseY - pHox.hoY, pHox.roc.rcAngle, pHox.roc.rcScaleX, pHox.roc.rcScaleY))
 								{
+									list.add(pHox);
+								}
+								} else {
 									list.add(pHox);
 								}
 							}
@@ -26537,7 +26532,6 @@ window['Runtime'] = (function Runtime(__can, __path){
 		this.imageBank = bank;
 		this.app = bank.app;
 		this.handle = h;
-		mosaicsLoaded++;
 	}
 	CMosaic.prototype =
 	{
@@ -26657,7 +26651,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 
 		loadMosaic: function (handle)
 		{
-			if (this.mosaics[handle] == null && handle != null)
+			if (this.mosaics[handle] == null)
 			{
 				if (this.oldMosaics != null && handle < this.oldMosaics.length && this.oldMosaics[handle] != null)
 				{
@@ -29816,11 +29810,14 @@ window['Runtime'] = (function Runtime(__can, __path){
 			{
 				type = 65536 - type;
 			}
-			var cond = -(code >> 16);
+			var cond = -(code >> 16)
 			var num = this.listPointers[this.rhEvents[type] + cond];
-			if (num != 0)
+			if (num != null && num != 0)
 			{
 				this.computeEventList(num, null);
+			} else {
+				console.log("null, trying rhEvents[type] without cond added")
+				this.computeEventList(this.listPointers[this.rhEvents[type]], null);
 			}
 		},
 
@@ -33918,13 +33915,8 @@ window['Runtime'] = (function Runtime(__can, __path){
 			if (this.type == 1)
 			{
 				this.imageUsed = this.app.imageBank.getImageFromHandle(this.poi.oiOC.ocImage);
-				if (this.imageUsed != null) {
-					this.width = this.imageUsed.width;
-	            	this.height = this.imageUsed.height;
-				} else {
-					this.width = 64;
-	            	this.height = 64;
-				}
+				this.width = this.imageUsed.width;
+	            this.height = this.imageUsed.height;
 			}
 			else if (this.type >= 32)
 			{
@@ -34115,9 +34107,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 				}
 				else if (this.type == COI.OBJ_BKD)
 				{
-				    if (this.imageUsed != null) {
-						context.renderImage(this.imageUsed, xx + this.x + this.imageUsed.xSpot, yy + this.y + this.imageUsed.ySpot, 0, 1.0, 1.0, this.effect, this.effectParam);
-					}
+				    context.renderImage(this.imageUsed, xx + this.x + this.imageUsed.xSpot, yy + this.y + this.imageUsed.ySpot, 0, 1.0, 1.0, this.effect, this.effectParam);
 				}
 				else
 				{

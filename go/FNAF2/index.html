@@ -16,6 +16,14 @@
 
       gtag("config", "G-N4CKXS2CMF");
     </script>
+    <script type="importmap">
+      {
+        "imports": {
+          "socket.io-client": "https://cdn.socket.io/4.7.4/socket.io.esm.min.js"
+        }
+      }
+    </script>
+    <script type="module" src="/js/LiveChat.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -95,7 +103,13 @@
     <h5 align="center" id="GameDescription">
       The second game in the FNAF series.
     </h5>
+    <!-- Livechat -->
+    <div class="lcc">
+      <p id="chatlog"></p>
+      <input type="text" id="lcin" autocomplete="off" />
+    </div>
     <div class="bottombuttons">
+      <button class="btn btn-outline-secondary lcb">Live Chat</button>
       <button
         class="btn btn-outline-secondary"
         onclick="location.pathname = '/'"
