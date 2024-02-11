@@ -152,7 +152,6 @@ if (LivechatNotify != null) {
 
 socket.on("connect", function () {
     console.log("Connected to Livechat Server.");
-    socket.on("message", receiveMessage);
     if (hasSetName) {
         userName = atob(localStorage["userName"]);
         // Fill chat with previously received text if possible
@@ -161,6 +160,8 @@ socket.on("connect", function () {
         }
     }
 });
+
+socket.on("message", receiveMessage);
 
 if (LivechatNotify != null) {
     LivechatNotify.checked = localStorage["notify"] == "true";
