@@ -164,7 +164,7 @@ socket.on("connect", function () {
                     behavior: "instant",
                 });
                 setVisible(false);
-            }, 100);
+            }, 10);
         }
     }
 });
