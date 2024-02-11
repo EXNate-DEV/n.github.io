@@ -157,10 +157,14 @@ socket.on("connect", function () {
         // Fill chat with previously received text if possible
         if (localStorage["chatText"] != null && LivechatLog != null) {
             LivechatLog.innerText = localStorage["chatText"];
-            LivechatLog.scrollTo({
-                top: LivechatLog.scrollHeight,
-                behavior: "instant",
-            });
+            setTimeout(() => {
+                setVisible(true);
+                LivechatLog.scrollTo({
+                    top: LivechatLog.scrollHeight,
+                    behavior: "instant",
+                });
+                setVisible(false);
+            }, 100);
         }
     }
 });
