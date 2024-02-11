@@ -6,14 +6,14 @@ class Livechat extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = `
-      <!-- Livechat -->
-        <div class="livechat-panel">
-            <p id="livechat-log"></p>
-            <input type="text" class="form-control" id="livechat-input" autocomplete="off" />
-            <div class="livechat-options">
-                <button class="btn btn-danger" id="livechat-clear" title="Clear the chat."><i class="bi bi-trash"></i></button>
-            </div>
-        </div>
+<!-- Livechat -->
+<div class="livechat-panel">
+    <p id="livechat-log"></p>
+    <input type="text" class="form-control" id="livechat-input" autocomplete="off" />
+    <div class="livechat-options">
+        <button class="btn btn-danger" id="livechat-clear" title="Clear the chat."><i class="bi bi-trash"></i></button>
+    </div>
+</div>
         `;
     }
 }

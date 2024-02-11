@@ -85,3 +85,7 @@ canvas {
     position: absolute;
     border-radius: 5px 5px 0px 0px;
 }
+
+#livechat-log p {
+    display: inline;
+}
