@@ -30,7 +30,7 @@ canvas {
     transition: all 0.25s;
 }
 
-.lcc {
+.livechat-panel {
     --chat-width: 0px;
     --visibility: 0%;
     width: 300px;
@@ -45,7 +45,7 @@ canvas {
     transition: all 0.25s;
 }
 
-#lcin {
+#livechat-input {
     color: white;
     bottom: 0px;
     position:absolute;
@@ -59,11 +59,11 @@ canvas {
     font-size: 80%;
 }
 
-#lcin::placeholder {
+#livechat-input::placeholder {
     color: #c2c2c2
 }
 
-#chatlog {
+#livechat-log {
     width: 100%;
     height: 87.5%;
     padding: 8px;
@@ -73,11 +73,11 @@ canvas {
     font-size: small;
 }
 
-#chatlog::-webkit-scrollbar {
+#livechat-log::-webkit-scrollbar {
     visibility: hidden;
 }
 
-.lcc2 {
+.livechat-options {
     top: -6vh;
     width: 100%;
     padding: 10px;

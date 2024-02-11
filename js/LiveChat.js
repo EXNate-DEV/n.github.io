@@ -1,28 +1,41 @@
 import { io } from "socket.io-client";
 
+document.body.appendChild(document.createElement("live-chat"))
+
 const socket = io("wss://lci-TheDevNate.replit.app/");
 const LivechatButton = document.getElementsByClassName("lcb")[0];
-const LivechatPanel = document.getElementsByClassName("lcc")[0];
-const LivechatInput = document.getElementById("lcin");
-const LivechatLog = document.getElementById("chatlog");
-const LivechatNotify = document.getElementById("lcnotify");
-const LivechatClear = document.getElementById("clearchat");
+const LivechatPanel = document.getElementsByClassName("livechat-panel")[0];
+const LivechatInput = document.getElementById("livechat-input");
+const LivechatLog = document.getElementById("livechat-log");
+const LivechatClear = document.getElementById("livechat-clear");
 const Toast = document.getElementById("bootstrapToast");
 let hasSetName = localStorage["userName"] != null;
+let hadLivechatOpen = localStorage["LivechatOpen"] == "true";
 let userName = "unknown";
 let panelVisible = false;
 let canSend = true;
 let sentPleaseWait = false;
 
-function setVisible(visible) {
+function setVisible(visible, instant) {
+    if (instant) {
+        LivechatPanel.style.transition = "all 0s";
+        LivechatButton.style.transition = "all 0s";
+    } else {
+        LivechatPanel.style.transition = "all 0.25s";
+        LivechatButton.style.transition = "all 0.25s";
+    }
     if (visible) {
         LivechatPanel.style.setProperty("--visibility", "100%");
         LivechatPanel.style.setProperty("--chat-width", "300px");
         LivechatButton.style.setProperty("--chat-width", "300px");
+        localStorage["LivechatOpen"] = "true";
+        panelVisible = true;
     } else {
         LivechatPanel.style.setProperty("--visibility", "0%");
         LivechatPanel.style.setProperty("--chat-width", "0px");
         LivechatButton.style.setProperty("--chat-width", "100px");
+        localStorage["LivechatOpen"] = "false";
+        panelVisible = false;
     }
 }
 
@@ -32,7 +45,8 @@ function sendMessage(message) {
     }
     if (!canSend) {
         if (!sentPleaseWait) {
-            LivechatLog.innerText += "Please wait 1s before sending another message.\n";
+            LivechatLog.innerText +=
+                "Please wait 1s before sending another message.\n";
             LivechatLog.scrollTo({
                 top: LivechatLog.scrollHeight,
                 behavior: "instant",
@@ -97,13 +111,16 @@ function receiveMessage(msg, userName) {
 
 if (LivechatButton != null) {
     LivechatButton.onclick = function () {
-        panelVisible = !panelVisible;
-        setVisible(panelVisible);
+        setVisible(!panelVisible);
     };
 }
 
 if (LivechatClear != null) {
     LivechatClear.onclick = function () {
+        if (!hasSetName) {
+            return;
+        }
+
         localStorage["chatText"] = "";
         LivechatLog.innerText = "";
     };
@@ -129,6 +146,7 @@ if (LivechatInput != null) {
                     // Clear value and set placeholder
                     LivechatInput.value = "";
                     LivechatInput.placeholder = "Send a message.";
+                    LivechatClear.className = "btn btn-danger"
                 }
             } else {
                 sendMessage(LivechatInput.value);
@@ -144,12 +162,6 @@ if (LivechatInput != null) {
     }
 }
 
-if (LivechatNotify != null) {
-    LivechatNotify.addEventListener("click", function (ev) {
-        localStorage["notify"] = `${LivechatNotify.checked}`;
-    });
-}
-
 socket.on("connect", function () {
     console.log("Connected to Livechat Server.");
     if (hasSetName) {
@@ -157,20 +169,22 @@ socket.on("connect", function () {
         // Fill chat with previously received text if possible
         if (localStorage["chatText"] != null && LivechatLog != null) {
             LivechatLog.innerText = localStorage["chatText"];
-            setTimeout(() => {
-                setVisible(true);
-                LivechatLog.scrollTo({
-                    top: LivechatLog.scrollHeight,
-                    behavior: "instant",
-                });
-                setVisible(false);
-            }, 10);
         }
+        LivechatClear.className = "btn btn-danger"
     }
 });
 
 socket.on("message", receiveMessage);
 
-if (LivechatNotify != null) {
-    LivechatNotify.checked = localStorage["notify"] == "true";
-}
+document.body.onload = function () {
+    if (!hasSetName) {
+        LivechatClear.className = "btn btn-danger disabled"
+    }
+
+    setVisible(true, true);
+    LivechatLog.scrollTo({
+        top: LivechatLog.scrollHeight,
+        behavior: "instant",
+    });
+    setVisible(hadLivechatOpen, true);
+};
