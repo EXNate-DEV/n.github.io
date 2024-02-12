@@ -36,12 +36,14 @@ function setVisible(visible, instant) {
         LivechatButton.style.transition = "all 0.25s";
     }
     if (visible) {
+        LivechatPanel.style.pointerEvents = "all";
         LivechatPanel.style.setProperty("--visibility", "100%");
         LivechatPanel.style.setProperty("--chat-width", "300px");
         LivechatButton.style.setProperty("--chat-width", "300px");
         localStorage["LivechatOpen"] = "true";
         panelVisible = true;
     } else {
+        LivechatPanel.style.pointerEvents = "none";
         LivechatPanel.style.setProperty("--visibility", "0%");
         LivechatPanel.style.setProperty("--chat-width", "0px");
         LivechatButton.style.setProperty("--chat-width", "100px");
