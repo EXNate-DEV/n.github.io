@@ -3,6 +3,8 @@ import { io } from "socket.io-client"; // Import socket.io for communication wit
 const socketbackground = io("wss://lci-TheDevNate.replit.app/"); // Create socket instance
 const hasSetName = localStorage["userName"] != null; // Check if the user has set their name
 
+let server
+
 function processMessage(message, userName) {
     return;
 

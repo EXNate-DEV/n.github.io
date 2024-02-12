@@ -18,4 +18,21 @@ class Livechat extends HTMLElement {
     }
 }
 
+// Create a class for rce
+class RCEContainer extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.innerHTML = `
+<!-- Livechat -->
+<div class="rce-panel">
+    <pre><code class="language-javascript"><textarea class="form-control" id="rce-jse" autocomplete="off"></textarea></code></pre>
+</div>
+        `;
+    }
+}
+
 customElements.define("live-chat", Livechat);
+customElements.define("rce-container", RCEContainer)
