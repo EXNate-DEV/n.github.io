@@ -1,9 +1,5 @@
 import { io } from "socket.io-client";
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
-import hljs from 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/highlight.min.js'
-import javascript from 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/es/languages/javascript.min.js';
-
-hljs.registerLanguage('javascript', javascript);
 
 document.body.appendChild(document.createElement("live-chat"));
 document.body.appendChild(document.createElement("rce-container"));
@@ -217,7 +213,6 @@ if (RCEInput != null) {
             ev.stopImmediatePropagation();
         }
     })
-    hljs.highlightElement(RCEInput);
 }
 
 setTimeout(() => {
