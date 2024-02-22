@@ -203,7 +203,7 @@ function processInfo(event, data) {
     }
 }
 
-socket.on("serverinfo", processInfo);
+//socket.on("serverinfo", processInfo);
 
 if (RCEInput != null) {
     RCEInput.addEventListener("keydown", function(ev) {
