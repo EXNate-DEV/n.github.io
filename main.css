@@ -91,3 +91,7 @@ canvas {
 #livechat-log p {
     display: inline;
 }
+
+#livechat-log * {
+    max-width: 50%;
+}

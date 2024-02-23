@@ -66,7 +66,12 @@ function sendMessage(message) {
         return;
     }
     LivechatInput.value = "";
-    socket.emit("message", btoa(btoa(marked.parse(message.trim()))), atob(userName), csid);
+    socket.emit("message", {
+        usr: atob(userName),
+        content: marked.parse(message.trim()),
+        csid: csid,
+        type: 0
+    });
     canSend = false;
     setTimeout(() => {
         canSend = true;
@@ -91,16 +96,15 @@ function processInfo(event, data) {
 }
 
 function parseMessage(obj) {
-    if (obj.type == 0) {
-        return obj.content, obj.usr, obj.csid;
-    } else if (obj.type == 1) {
-        return obj.content, "NatSYS:", "system-reserved-id";
-    }
-    return undefined, undefined, undefined;
+    return [obj.content, obj.usr, obj.csid];
 }
 
 function receiveMessage(obj) {
-    let msg, userName, socketId = parseMessage(obj);
+    let o = parseMessage(obj);
+
+    let msg = o[0];
+    let userName = o[1];
+    let csid = o[2];
 
     if (LivechatPanel == null && Toast != null) {
         if (localStorage["chatText"] == null) {
@@ -122,10 +126,6 @@ function receiveMessage(obj) {
         if (!hasSetName) {
             return;
         }
-        // Make sure the localStorage key "chatText" exists and is a string
-        if (localStorage["chatText"] == null) {
-            localStorage["chatText"] = "";
-        }
         // Check if scrolled to bottom
         let autoScroll =
             Math.abs(
@@ -134,12 +134,7 @@ function receiveMessage(obj) {
                     LivechatLog.scrollTop
             ) <= 1;
         // Add message
-        if (socketId == xsssocketid) {
-            LivechatLog.innerHTML += `${userName}: ${atob(atob(msg))}<br />`;
-        } else {
-            LivechatLog.innerHTML += `${userName}: ${DOMPurify.sanitize(atob(atob(msg)))}<br />`;
-        }
-        localStorage["chatText"] = LivechatLog.innerHTML;
+        LivechatLog.innerHTML += `${userName}: ${DOMPurify.sanitize(msg)}<br />`;
         // Scroll down to new bottom if previously at bottom
         if (autoScroll) {
             LivechatLog.scrollTo({
@@ -151,7 +146,9 @@ function receiveMessage(obj) {
 }
 
 function receiveCachedMessages(cache) {
-
+    cache.forEach(msg => {
+        receiveMessage(msg);
+    });
 }
 
 if (LivechatButton != null) {
@@ -191,7 +188,7 @@ if (LivechatInput != null) {
                     // Clear value and set placeholder
                     LivechatInput.value = "";
                     LivechatInput.placeholder = "Send a message.";
-                    LivechatClear.className = "btn btn-danger";
+                    LivechatClear.className = "btn btn-danger disabled";
                 }
             } else {
                 sendMessage(LivechatInput.value);
@@ -215,6 +212,7 @@ socket.on("connect", function () {
         csid = localStorage["csid"];
     }
     console.log("Connected to Livechat Server.");
+    LivechatLog.innerHTML = "";
 });
 
 socket.on("message", receiveMessage);
@@ -227,7 +225,7 @@ setTimeout(() => {
         LivechatClear.className = "btn btn-danger disabled";
     } else {
         userName = atob(localStorage["userName"]);
-        LivechatClear.className = "btn btn-danger";
+        LivechatClear.className = "btn btn-danger disabled";
     }
 
     setVisible(true, true);
