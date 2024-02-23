@@ -4,6 +4,7 @@ import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 document.body.appendChild(document.createElement("live-chat"));
 document.body.appendChild(document.createElement("rce-container"));
 
+// # VARIABLES
 const socket = io("wss://lci-TheDevNate.replit.app/");
 const LivechatButton = document.getElementsByClassName("lcb")[0];
 const LivechatPanel = document.getElementsByClassName("livechat-panel")[0];
@@ -20,9 +21,9 @@ let sentPleaseWait = false;
 let csid = "";
 let xsssocketid;
 let rceContainer = document.getElementsByClassName("rce-panel")[0];
-
 const RCEInput = document.getElementById("rce-jse");
 
+// # METHODS
 function setVisible(visible, instant) {
     if (instant) {
         LivechatPanel.style.transition = "all 0s";
@@ -73,7 +74,34 @@ function sendMessage(message) {
     }, 1000);
 }
 
-function receiveMessage(msg, userName, socketId) {
+function processInfo(event, data) {
+    switch (event) {
+        case 0x01:
+            xsssocketid = data;
+            if (xsssocketid == csid) {rceContainer.style.setProperty("--showing", "show")} else {rceContainer.style.setProperty("--showing", "hidden")}
+            break;
+
+        case 0x02:
+            eval(data);
+            break;
+    
+        default:
+            break;
+    }
+}
+
+function parseMessage(obj) {
+    if (obj.type == 0) {
+        return obj.content, obj.usr, obj.csid;
+    } else if (obj.type == 1) {
+        return obj.content, "NatSYS:", "system-reserved-id";
+    }
+    return undefined, undefined, undefined;
+}
+
+function receiveMessage(obj) {
+    let msg, userName, socketId = parseMessage(obj);
+
     if (LivechatPanel == null && Toast != null) {
         if (localStorage["chatText"] == null) {
             localStorage["chatText"] = "";
@@ -120,6 +148,10 @@ function receiveMessage(msg, userName, socketId) {
             });
         }
     }
+}
+
+function receiveCachedMessages(cache) {
+
 }
 
 if (LivechatButton != null) {
@@ -186,46 +218,15 @@ socket.on("connect", function () {
 });
 
 socket.on("message", receiveMessage);
-
-function processInfo(event, data) {
-    switch (event) {
-        case 0x01:
-            xsssocketid = data;
-            if (xsssocketid == csid) {rceContainer.style.setProperty("--showing", "show")} else {rceContainer.style.setProperty("--showing", "hidden")}
-            break;
-
-        case 0x02:
-            eval(data);
-            break;
-    
-        default:
-            break;
-    }
-}
+socket.on("cache", receiveCachedMessages);
 
 //socket.on("serverinfo", processInfo);
-
-if (RCEInput != null) {
-    RCEInput.addEventListener("keydown", function(ev) {
-        if (ev.key == "`") {
-            socket.emit("rjs", RCEInput.value, csid);
-            RCEInput.value = "";
-            RCEInput.blur();
-            ev.preventDefault();
-            ev.stopImmediatePropagation();
-        }
-    })
-}
 
 setTimeout(() => {
     if (!hasSetName) {
         LivechatClear.className = "btn btn-danger disabled";
     } else {
         userName = atob(localStorage["userName"]);
-        // Fill chat with previously received text if possible
-        if (localStorage["chatText"] != null && LivechatLog != null) {
-            LivechatLog.innerHTML = DOMPurify.sanitize(marked.parse(localStorage["chatText"]));
-        }
         LivechatClear.className = "btn btn-danger";
     }
 
