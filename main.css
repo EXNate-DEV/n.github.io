@@ -95,3 +95,11 @@ canvas {
 #livechat-log * {
     max-width: 50%;
 }
+
+.main-a {
+    width: 50%;
+}
+
+.gamebtn {
+    margin: 5px;
+}
