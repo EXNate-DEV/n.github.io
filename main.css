@@ -23,7 +23,7 @@ body {
 }
 
 canvas {
-    image-rendering: pixelated;
+    /*image-rendering: pixelated;*/
 }
 
 .lcb {

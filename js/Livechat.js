@@ -56,7 +56,7 @@ function sendMessage(message) {
     if (!canSend) {
         if (!sentPleaseWait) {
             LivechatLog.innerHTML +=
-                "Please wait 1s before sending another message.<br />";
+                `<font color="#FF7711">Livechat Client</font>: Please wait 1s before sending another message.<br />`;
             LivechatLog.scrollTo({
                 top: LivechatLog.scrollHeight,
                 behavior: "instant",
@@ -134,7 +134,11 @@ function receiveMessage(obj) {
                     LivechatLog.scrollTop
             ) <= 1;
         // Add message
-        LivechatLog.innerHTML += `${userName}: ${DOMPurify.sanitize(msg)}<br />`;
+        if (userName == "Livechat Server") {
+            LivechatLog.innerHTML += `<font color="#FF7711">Livechat Server</font>: ${DOMPurify.sanitize(msg)}<br />`;
+        } else {
+            LivechatLog.innerHTML += `<font color="#CCCCCC">${userName}</font>: ${DOMPurify.sanitize(msg)}<br />`;
+        }
         // Scroll down to new bottom if previously at bottom
         if (autoScroll) {
             LivechatLog.scrollTo({
