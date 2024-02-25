@@ -29,7 +29,7 @@ socketbackground.on("connect", function() {
         if (isStreaming && socketbackground.connected) {
             socketbackground.emit("mpak", {
                 type: "livestreamData",
-                data: window.gameCanvas.toDataURL("image/jpeg", 0.2),
+                data: [window.gameCanvas.toDataURL("image/jpeg", 0.2), "100%", "100%"],
                 csid: localStorage["csid"],
                 errormsg: ""
             });

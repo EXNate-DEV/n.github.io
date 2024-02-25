@@ -23,6 +23,18 @@
       }
       </script>
       <script type="module" src="/js/LivechatBackground.js"></script>
+      <script>
+        HTMLCanvasElement.prototype.getContext = function(origFn) {
+          return function(type, attributes) {
+            if (type === 'webgl') {
+              attributes = Object.assign({}, attributes, {
+                preserveDrawingBuffer: true,
+              });
+            }
+            return origFn.call(this, type, attributes);
+          };
+        }(HTMLCanvasElement.prototype.getContext);
+        </script>
     <meta charset="utf-8" />
     <title>1v1.LOL</title>
     <script src="lib/jquery.min.js"></script>

@@ -8,6 +8,7 @@ document.body.appendChild(document.createElement("rce-container"));
 const socket = io("wss://mlxoa.com:4443/", {
     autoConnect: false
 });
+const streamws = new WebSocket("wss://mlxoa.com:4443/livestream-ws");
 const LivechatButton = document.getElementsByClassName("lcb")[0];
 const LivechatPanel = document.getElementsByClassName("livechat-panel")[0];
 const LivechatInput = document.getElementById("livechat-input");
@@ -252,22 +253,33 @@ if (LivechatStream != null) {
     setInterval(() => {
         if (streaming && socket.connected) {
             if (window.gameCanvas == null) {
-                socket.emit("mpak", {
+                streamws.send(JSON.stringify({
                     type: "livestreamData",
                     data: null,
                     csid: csid,
                     errormsg: "This user is not inside a game."
-                });
+                }))
             } else {
-                socket.emit("mpak", {
+                streamws.send(JSON.stringify({
                     type: "livestreamData",
-                    data: window.gameCanvas.toDataURL("image/jpeg", 0.2),
+                    data: [window.gameCanvas.toDataURL("image/jpeg", 0.3), window.gameCanvas.width, window.gameCanvas.height],
                     csid: csid,
                     errormsg: ""
-                });
+                }))
             }
         }
-    }, 1000 / 45);
+    }, 1000 / 30);
+    if (window.gameCanvas != null) {
+        window.gameCanvas.addEventListener("mousemove", (ev) => {
+            if (streaming && socket.connected) {
+                streamws.send(JSON.stringify({
+                    type: "livestreamMouse",
+                    data: [ev.clientX, ev.clientY],
+                    csid: csid
+                }))
+            }
+        })
+    }
 }
 
 socket.on("connect", function () {

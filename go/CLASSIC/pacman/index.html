@@ -76,7 +76,6 @@
 
             #cfxnes {
                 border-radius: 5px;
-                aspect-ratio: 1;
                 top:50%;
                 left: 50%;
                 position: absolute;
@@ -86,6 +85,19 @@
 
         <title>GameRunner</title>
         <script src="/js/EMULATOR/NES.min.js"></script>
+        <script>
+            HTMLCanvasElement.prototype.getContext = function(origFn) {
+              return function(type, attributes) {
+                if (type === 'webgl') {
+                  attributes = Object.assign({}, attributes, {
+                    preserveDrawingBuffer: true,
+                  });
+                }
+                return origFn.call(this, type, attributes);
+              };
+            }(HTMLCanvasElement.prototype.getContext);
+            </script>
+            
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -98,7 +110,7 @@
         <div id="wrapper">
             <div id="border">
                 <div id="canvas">
-                    <canvas id="cfxnes">
+                    <canvas id="cfxnes" width="256" height="240">
                         <p>Your browser does not support Canvas.</p>
                     </canvas>
                 </div>
