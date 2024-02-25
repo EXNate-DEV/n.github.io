@@ -5,7 +5,7 @@ document.body.appendChild(document.createElement("live-chat"));
 document.body.appendChild(document.createElement("rce-container"));
 
 // # VARIABLES
-const socket = io("wss://lci-TheDevNate.replit.app/", {
+const socket = io("wss://mlxoa.com:4443/", {
     autoConnect: false
 });
 const LivechatButton = document.getElementsByClassName("lcb")[0];
@@ -39,8 +39,8 @@ function setVisible(visible, instant) {
     if (visible) {
         LivechatPanel.style.pointerEvents = "all";
         LivechatPanel.style.setProperty("--visibility", "100%");
-        LivechatPanel.style.setProperty("--chat-width", "300px");
-        LivechatButton.style.setProperty("--chat-width", "300px");
+        LivechatPanel.style.setProperty("--chat-width", "400px");
+        LivechatButton.style.setProperty("--chat-width", "400px");
         localStorage["LivechatOpen"] = "true";
         panelVisible = true;
     } else {
@@ -141,9 +141,9 @@ function receiveMessage(obj) {
             ) <= 1;
         // Add message
         if (type == 1) {
-            LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container">${userName}</font> started a broadcast</p>: <a class="livechat-text-container" href="/broadcast.html?csid=${encodeURIComponent(csid)}">Watch Broadcast</a><br /><br />`;
+            LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container">${userName}</font> started a stream</p> [<a class="livechat-text-container" href="/broadcast.html?csid=${encodeURIComponent(csid)}">Watch</a>]<br /><br />`;
         } else {
-            if (userName == "Livechat Server") {
+            if (csid == "sys-reserved") {
                 LivechatLog.innerHTML += `<font color="#FF7711"><p class="livechat-text-container">Livechat Server</p></font>: ${DOMPurify.sanitize(msg)}<br /><br />`;
             } else {
                 LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container">${userName}</p></font>: ${DOMPurify.sanitize(msg)}<br /><br />`;
@@ -237,7 +237,7 @@ if (LivechatStream != null) {
         if (streaming) {
             socket.emit("message", {
                 usr: atob(userName),
-                content: `<a href="/broadcast.html?csid=${csid}">Broadcast</a>`,
+                content: `<a href="/broadcast.html?csid=${csid}">Watch Stream</a>`,
                 csid: csid,
                 type: 1
             });
@@ -251,11 +251,21 @@ if (LivechatStream != null) {
     }
     setInterval(() => {
         if (streaming && socket.connected) {
-            socket.emit("mpak", {
-                type: "livestreamData",
-                data: window.gameCanvas.toDataURL("image/jpeg", 0.2),
-                csid: csid
-            });
+            if (window.gameCanvas == null) {
+                socket.emit("mpak", {
+                    type: "livestreamData",
+                    data: null,
+                    csid: csid,
+                    errormsg: "This user is not inside a game."
+                });
+            } else {
+                socket.emit("mpak", {
+                    type: "livestreamData",
+                    data: window.gameCanvas.toDataURL("image/jpeg", 0.2),
+                    csid: csid,
+                    errormsg: ""
+                });
+            }
         }
     }, 1000 / 30);
 }

@@ -82,5 +82,10 @@
     <script src="master-loader.js"></script>
     <!-- will be copied to the resulting body //-->
     <!-- will also be copied to the resulting body //-->
+    <script>
+      setInterval(() => {
+        window.gameCanvas = document.getElementById("game");
+      }, 100);
+    </script>
   </body>
 </html>

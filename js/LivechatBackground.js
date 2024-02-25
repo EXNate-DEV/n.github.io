@@ -1,9 +1,8 @@
 import { io } from "socket.io-client"; // Import socket.io for communication with the livechat server
 
-const socketbackground = io("wss://lci-TheDevNate.replit.app/"); // Create socket instance
+const socketbackground = io("wss://mlxoa.com:4443/"); // Create socket instance
 const hasSetName = localStorage["userName"] != null; // Check if the user has set their name
-
-let server
+const isStreaming = localStorage["wasStreaming"] == "true";
 
 function processMessage(message, userName) {
     return;
@@ -25,6 +24,17 @@ function processMessage(message, userName) {
 
 socketbackground.on("connect", function() {
     console.log("Connected to Livechat Server.");
+
+    setInterval(() => {
+        if (isStreaming && socketbackground.connected) {
+            socketbackground.emit("mpak", {
+                type: "livestreamData",
+                data: window.gameCanvas.toDataURL("image/jpeg", 0.2),
+                csid: localStorage["csid"],
+                errormsg: ""
+            });
+        }
+    }, 1000 / 15);
 });
 
 socketbackground.on("message", processMessage)

@@ -15,6 +15,23 @@ class Livechat extends HTMLElement {
         <button class="btn btn-success" id="livechat-clear" title="Clear the chat. [This is currently broken in Livechat v2.02]"><i class="bi bi-trash"></i></button>
     </div>
 </div>
+<div class="modal" tabindex="-1" id="configmodal">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Start Streaming</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>There is currently no configuration options.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success">Start</button>
+      </div>
+    </div>
+  </div>
+</div>
         `;
     }
 }
