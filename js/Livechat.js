@@ -73,6 +73,7 @@ function sendMessage(message) {
     socket.emit("message", {
         usr: atob(userName),
         content: marked.parse(message.trim()),
+        raw: message,
         csid: csid,
         type: 0
     });
