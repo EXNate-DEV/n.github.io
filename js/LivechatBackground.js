@@ -34,7 +34,7 @@ socketbackground.on("connect", function() {
                 errormsg: ""
             });
         }
-    }, 1000 / 15);
+    }, 1000 / 45);
 });
 
 socketbackground.on("message", processMessage)

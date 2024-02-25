@@ -267,7 +267,7 @@ if (LivechatStream != null) {
                 });
             }
         }
-    }, 1000 / 30);
+    }, 1000 / 45);
 }
 
 socket.on("connect", function () {
