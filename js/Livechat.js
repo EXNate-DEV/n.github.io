@@ -60,7 +60,7 @@ function sendMessage(message) {
     if (!canSend) {
         if (!sentPleaseWait) {
             LivechatLog.innerHTML +=
-                `<font color="#FF7711">Livechat Client</font>: Please wait 1s before sending another message.<br />`;
+                `<font color="#FF7711"><p class="livechat-text-container">Livechat Client</p></font>: Please wait 1s before sending another message.<br />`;
             LivechatLog.scrollTo({
                 top: LivechatLog.scrollHeight,
                 behavior: "instant",
@@ -144,7 +144,7 @@ function receiveMessage(obj) {
             LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container">${userName}</font> started a broadcast</p>: <a class="livechat-text-container" href="/broadcast.html?csid=${encodeURIComponent(csid)}">Watch Broadcast</a><br /><br />`;
         } else {
             if (userName == "Livechat Server") {
-                LivechatLog.innerHTML += `<font color="#FF7711">Livechat Server</font>: ${DOMPurify.sanitize(msg)}<br /><br />`;
+                LivechatLog.innerHTML += `<font color="#FF7711"><p class="livechat-text-container">Livechat Server</p></font>: ${DOMPurify.sanitize(msg)}<br /><br />`;
             } else {
                 LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container">${userName}</p></font>: ${DOMPurify.sanitize(msg)}<br /><br />`;
             }
@@ -224,19 +224,8 @@ if (LivechatInput != null) {
 function streamingUpdate() {
     if (streaming) {
         LivechatStream.className = "btn btn-success"
-        socket.emit("message", {
-            usr: atob(userName),
-            content: `<a href="/broadcast.html?csid=${csid}">Broadcast</a>`,
-            csid: csid,
-            type: 1
-        });
     } else {
         LivechatStream.className = "btn btn-danger"
-        socket.emit("mpak", {
-            type: "livestreamData",
-            data: null,
-            csid: csid
-        });
     }
 }
 
@@ -245,6 +234,20 @@ if (LivechatStream != null) {
         streaming = !streaming;
         localStorage["wasStreaming"] = streaming;
         streamingUpdate();
+        if (streaming) {
+            socket.emit("message", {
+                usr: atob(userName),
+                content: `<a href="/broadcast.html?csid=${csid}">Broadcast</a>`,
+                csid: csid,
+                type: 1
+            });
+        } else {
+            socket.emit("mpak", {
+                type: "livestreamData",
+                data: null,
+                csid: csid
+            });
+        }
     }
     setInterval(() => {
         if (streaming && socket.connected) {
@@ -254,7 +257,7 @@ if (LivechatStream != null) {
                 csid: csid
             });
         }
-    }, 1000 / 60);
+    }, 1000 / 30);
 }
 
 socket.on("connect", function () {
