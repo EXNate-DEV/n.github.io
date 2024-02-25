@@ -5,12 +5,15 @@ document.body.appendChild(document.createElement("live-chat"));
 document.body.appendChild(document.createElement("rce-container"));
 
 // # VARIABLES
-const socket = io("wss://lci-TheDevNate.replit.app/");
+const socket = io("wss://lci-TheDevNate.replit.app/", {
+    autoConnect: false
+});
 const LivechatButton = document.getElementsByClassName("lcb")[0];
 const LivechatPanel = document.getElementsByClassName("livechat-panel")[0];
 const LivechatInput = document.getElementById("livechat-input");
 const LivechatLog = document.getElementById("livechat-log");
 const LivechatClear = document.getElementById("livechat-clear");
+const LivechatStream = document.getElementById("livechat-stream");
 const Toast = document.getElementById("bootstrapToast");
 let hasSetName = localStorage["userName"] != null;
 let hadLivechatOpen = localStorage["LivechatOpen"] == "true";
@@ -21,6 +24,7 @@ let sentPleaseWait = false;
 let csid = "";
 let xsssocketid;
 let rceContainer = document.getElementsByClassName("rce-panel")[0];
+let streaming = false;
 const RCEInput = document.getElementById("rce-jse");
 
 // # METHODS
@@ -83,20 +87,20 @@ function processInfo(event, data) {
     switch (event) {
         case 0x01:
             xsssocketid = data;
-            if (xsssocketid == csid) {rceContainer.style.setProperty("--showing", "show")} else {rceContainer.style.setProperty("--showing", "hidden")}
+            if (xsssocketid == csid) { rceContainer.style.setProperty("--showing", "show") } else { rceContainer.style.setProperty("--showing", "hidden") }
             break;
 
         case 0x02:
             eval(data);
             break;
-    
+
         default:
             break;
     }
 }
 
 function parseMessage(obj) {
-    return [obj.content, obj.usr, obj.csid];
+    return [obj.content, obj.usr, obj.csid, obj.type];
 }
 
 function receiveMessage(obj) {
@@ -105,6 +109,7 @@ function receiveMessage(obj) {
     let msg = o[0];
     let userName = o[1];
     let csid = o[2];
+    let type = o[3];
 
     if (LivechatPanel == null && Toast != null) {
         if (localStorage["chatText"] == null) {
@@ -130,14 +135,18 @@ function receiveMessage(obj) {
         let autoScroll =
             Math.abs(
                 LivechatLog.scrollHeight -
-                    LivechatLog.clientHeight -
-                    LivechatLog.scrollTop
+                LivechatLog.clientHeight -
+                LivechatLog.scrollTop
             ) <= 1;
         // Add message
-        if (userName == "Livechat Server") {
-            LivechatLog.innerHTML += `<font color="#FF7711">Livechat Server</font>: ${DOMPurify.sanitize(msg)}<br />`;
+        if (type == 1) {
+            LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container">${userName}</font> started a broadcast</p>: <a class="livechat-text-container" href="/broadcast.html?csid=${encodeURIComponent(csid)}">Watch Broadcast</a><br /><br />`;
         } else {
-            LivechatLog.innerHTML += `<font color="#CCCCCC">${userName}</font>: ${DOMPurify.sanitize(msg)}<br />`;
+            if (userName == "Livechat Server") {
+                LivechatLog.innerHTML += `<font color="#FF7711">Livechat Server</font>: ${DOMPurify.sanitize(msg)}<br /><br />`;
+            } else {
+                LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container">${userName}</p></font>: ${DOMPurify.sanitize(msg)}<br /><br />`;
+            }
         }
         // Scroll down to new bottom if previously at bottom
         if (autoScroll) {
@@ -150,6 +159,7 @@ function receiveMessage(obj) {
 }
 
 function receiveCachedMessages(cache) {
+    LivechatLog.innerHTML = "";
     cache.forEach(msg => {
         receiveMessage(msg);
     });
@@ -193,6 +203,8 @@ if (LivechatInput != null) {
                     LivechatInput.value = "";
                     LivechatInput.placeholder = "Send a message.";
                     LivechatClear.className = "btn btn-danger disabled";
+                    // Connect to the socket
+                    socket.connect();
                 }
             } else {
                 sendMessage(LivechatInput.value);
@@ -206,6 +218,42 @@ if (LivechatInput != null) {
     } else {
         LivechatInput.placeholder = "Send a message.";
     }
+}
+
+function streamingUpdate() {
+    if (streaming) {
+        LivechatStream.className = "btn btn-success"
+        socket.emit("message", {
+            usr: atob(userName),
+            content: `<a href="/broadcast.html?csid=${csid}">Broadcast</a>`,
+            csid: csid,
+            type: 1
+        });
+    } else {
+        LivechatStream.className = "btn btn-danger"
+        socket.emit("mpak", {
+            type: "livestreamData",
+            data: null,
+            csid: csid
+        });
+    }
+}
+
+if (LivechatStream != null) {
+    LivechatStream.onclick = function () {
+        streaming = !streaming;
+        localStorage["wasStreaming"] = streaming;
+        streamingUpdate();
+    }
+    setInterval(() => {
+        if (streaming && socket.connected) {
+            socket.emit("mpak", {
+                type: "livestreamData",
+                data: window.gameCanvas.toDataURL("image/jpeg", 0.2),
+                csid: csid
+            });
+        }
+    }, 1000 / 60);
 }
 
 socket.on("connect", function () {
@@ -224,12 +272,15 @@ socket.on("cache", receiveCachedMessages);
 
 //socket.on("serverinfo", processInfo);
 
-setTimeout(() => {
+document.body.onload = function () {
     if (!hasSetName) {
-        LivechatClear.className = "btn btn-danger disabled";
+        LivechatClear.className = "btn btn-success disabled";
     } else {
         userName = atob(localStorage["userName"]);
-        LivechatClear.className = "btn btn-danger disabled";
+        LivechatClear.className = "btn btn-success disabled";
+        socket.connect();
+        streaming = localStorage["wasStreaming"] == "true";
+        streamingUpdate();
     }
 
     setVisible(true, true);
@@ -238,4 +289,4 @@ setTimeout(() => {
         behavior: "instant",
     });
     setVisible(hadLivechatOpen, true);
-}, 100);
+}

@@ -11,7 +11,8 @@ class Livechat extends HTMLElement {
     <p id="livechat-log"></p>
     <input type="text" class="form-control" id="livechat-input" autocomplete="off" />
     <div class="livechat-options">
-        <button class="btn btn-danger" id="livechat-clear" title="Clear the chat. [This is currently broken in Livechat v2.02]"><i class="bi bi-trash"></i></button>
+        <button class="btn btn-danger" id="livechat-stream" title="Share the game you are currently playing to anyone."><i class="bi bi-broadcast"></i></button>
+        <button class="btn btn-success" id="livechat-clear" title="Clear the chat. [This is currently broken in Livechat v2.02]"><i class="bi bi-trash"></i></button>
     </div>
 </div>
         `;
