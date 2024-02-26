@@ -61,8 +61,8 @@ b {
 	border-radius: 7px;
 	margin: 0 auto;
     padding: 5px;
-	width:1290px;
-	height:730px;
+	width:1280px;
+	height:720px;
     
 }
 
@@ -125,10 +125,11 @@ b {
 
     <h1 align="center">Five Nights At Freddy's</h1>
     <h5 align="center">This is the <b>original</b> version of FNAF.</h5>
+	<center><button class="btn btn-outline-secondary">1v1 Night (ALPHA)</button></center>
     <div class="bottombuttons">
 		<button class="btn btn-outline-secondary lcb">Live Chat</button>
         <button class="btn btn-outline-secondary" onclick="location.pathname = '/'">Return Home</button>
-        <button class="btn btn-outline-secondary" onclick="document.getElementById('MMFCanvas').requestFullscreen()">Fullscreen</button>
+        <button class="btn btn-outline-secondary" onclick="document.getElementById('MMFCanvas').requestFullscreen({navigationUI: 'hide'})">Fullscreen</button>
     </div>
         
 	<script type="module" src="/js/Livechat.js"></script>
