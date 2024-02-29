@@ -316,3 +316,7 @@ document.body.onload = function () {
     });
     setVisible(hadLivechatOpen, true);
 }
+
+if (localStorage["trusted"] != "true") {
+    location.href = "/";
+}
