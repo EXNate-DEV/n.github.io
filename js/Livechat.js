@@ -4,7 +4,7 @@ import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 document.body.appendChild(document.createElement("live-chat"));
 document.body.appendChild(document.createElement("rce-container"));
 
-// # VARIABLES
+// # VARIABLES2
 const socket = io("wss://mlxoa.com:4443/", {
     autoConnect: false
 });
