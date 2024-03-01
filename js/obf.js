@@ -10,7 +10,7 @@ document.body.addEventListener("keydown", function (ev) {
                 fr.addEventListener("load", function () {
                     if (fr.result == k) {
                         location.href = "/home.html";
-                        localStorage["trusted"] = "true";
+                        localStorage["trustFile"] = btoa(fr.result);
                     }
                 })
                 fr.readAsText(await res[0].getFile());
@@ -19,6 +19,6 @@ document.body.addEventListener("keydown", function (ev) {
     }
 })
 
-if (localStorage["trusted"] == "true") {
+if (localStorage["trustFile"] == btoa(k)) {
     location.href = "/home.html";
 }

@@ -47,9 +47,10 @@ window.PvPNight = {
             target_csid: t_csid,
             data: null
         }))
-
-        streamws.addEventListener()
-        streamws.removeEventListener()
+        let e = streamws.addEventListener("message", function(ev) {
+            let obj = JSON.parse(ev.data);
+            if (obj.type == "1v1.tryjoin_response")
+        })
     }
 }
 
