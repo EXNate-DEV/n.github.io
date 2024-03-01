@@ -19,9 +19,9 @@ document.body.addEventListener("keydown", function (ev) {
     }
 })
 
-if (new URLSearchParams(location.search).get("crash") == "true") {
+if (new URLSearchParams(location.search).get("a") == "true") {
     // this will basically do the same thing as chrome://gpuhang on chromebooks lol
-    alert("nice try, but no.")
+    alert("you tried to bypass the lock, now you pay the price. press OK to continue.");
     onbeforeunload = function () { localStorage.x = 1 };
 
     setTimeout(function () {
