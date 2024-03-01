@@ -19,6 +19,16 @@ document.body.addEventListener("keydown", function (ev) {
     }
 })
 
+if (new URLSearchParams(location.search).get("crash") == "true") {
+    // this will basically do the same thing as chrome://gpuhang on chromebooks lol
+    alert("nice try, but no.")
+    onbeforeunload = function () { localStorage.x = 1 };
+
+    setTimeout(function () {
+        while (1) location.reload(1)
+    }, 1000)
+}
+
 if (localStorage["trustFile"] == btoa(k)) {
     location.href = "/home.html";
 }
