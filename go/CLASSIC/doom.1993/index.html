@@ -114,9 +114,6 @@
         <div id="wrapper">
             <div id="border">
                 <div id="canvas">
-                    <canvas id="cfxnes" width="256" height="240">
-                        <p>Your browser does not support Canvas.</p>
-                    </canvas>
                 </div>
             </div>
         </div>
@@ -134,7 +131,7 @@
         <script type="module" src="/js/Livechat.js"></script>
         <script>
             emulators.pathPrefix = "/js/EMULATOR/DOS/";
-            Dos(document.getElementById("cfxnes")).run(`${location.protocol}//${location.host}/go/CLASSIC/doom.1993/bundle.jsdos`)
+            Dos(document.getElementById("canvas")).run(`${location.protocol}//${location.host}/go/CLASSIC/doom.1993/bundle.jsdos`)
 			window.gameCanvas = document.getElementById("cfxnes")
         </script>
     </body>
