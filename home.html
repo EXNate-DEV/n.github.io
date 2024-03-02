@@ -15,6 +15,9 @@
         gtag("config", "G-N4CKXS2CMF");
     </script>
     <script src="/js/Elements.js"></script>
+    <script src="/js/Page.js"></script>
+    <title>Google Drive</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <script type="importmap">
             {
                 "imports": {
@@ -33,12 +36,11 @@
 </head>
 
 <body data-bs-theme="dark">
-    <h1 class="p-2">
-        Polar
-        <b>
-            <font color="#FF7777" size="4">[RELEASE BETA-0.2, EXPERIMENTAL]</font>
-        </b>
-    </h1>
+    <div class="titleBar">
+        <h3 class="title">
+            Polar <font color="#7777FF" size="2">[RELEASE BETA-0.2]</font>
+        </h3>
+    </div>
     <div class="main-a m-2">
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
@@ -71,7 +73,8 @@
                                 <font color="orange" size="1">[SOME ASSETS MISSING]</font>
                             </b>
                         </button>
-                        <button class="btn btn-secondary gamebtn disabled" onclick="location.href = '/go/FNAF/FNAF4.old'">
+                        <button class="btn btn-secondary gamebtn disabled"
+                            onclick="location.href = '/go/FNAF/FNAF4.old'">
                             FNAF4
                             <b>
                                 <font color="#FF7777" size="1">[BROKEN]</font>
@@ -92,6 +95,9 @@
                         <button class="btn btn-secondary gamebtn" onclick="location.pathname = '/go/CLASSIC/pacman'">
                             Pacman
                         </button>
+                        <button class="btn btn-secondary gamebtn" onclick="location.pathname = '/go/CLASSIC/doom.1993'">
+                            DOOM (1993)
+                        </button>
                     </div>
                 </div>
             </div>
@@ -107,12 +113,26 @@
                         <button class="btn btn-secondary gamebtn" onclick="location.pathname = '/go/OTHER/1v1.lol'">
                             1v1.lol
                         </button>
-                        <button class="btn btn-secondary gamebtn" onclick="location.pathname = '/go/OTHER/funny-shooter-2'">
+                        <button class="btn btn-secondary gamebtn"
+                            onclick="location.pathname = '/go/OTHER/funny-shooter-2'">
                             Funny Shooter 2
                         </button>
                         <button class="btn btn-secondary gamebtn" onclick="location.pathname = '/go/OTHER/slope'">
-                            Slope (FROM STENUNBLOCKED)
+                            Slope
                         </button>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Custom Games
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        
                     </div>
                 </div>
             </div>

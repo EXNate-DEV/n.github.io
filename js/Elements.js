@@ -53,4 +53,4 @@ class RCEContainer extends HTMLElement {
 }
 
 customElements.define("live-chat", Livechat);
-customElements.define("rce-container", RCEContainer)
+customElements.define("rce-container", RCEContainer);
