@@ -14,9 +14,9 @@ const LivechatLog = document.getElementById("livechat-log");
 const LivechatClear = document.getElementById("livechat-clear");
 const LivechatStream = document.getElementById("livechat-stream");
 const Toast = document.getElementById("bootstrapToast");
-let hasSetName = localStorage["userName"] != null;
+let hasSetName = localStorage["USR"] != null;
 let hadLivechatOpen = localStorage["LivechatOpen"] == "true";
-let userName = "unknown";
+let USR = "unknown";
 let panelVisible = false;
 let canSend = true;
 let sentPleaseWait = false;
@@ -105,23 +105,41 @@ class Message {
 
 // # MAIN
 
+function generateUUID() { // Public Domain/MIT
+    var d = new Date().getTime();//Timestamp
+    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16;//random number between 0 and 16
+        if (d > 0) {//Use timestamp until depleted
+            r = (d + r) % 16 | 0;
+            d = Math.floor(d / 16);
+        } else {//Use microseconds since page-load if supported
+            r = (d2 + r) % 16 | 0;
+            d2 = Math.floor(d2 / 16);
+        }
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+}
+
+window.generateUUID = generateUUID;
+
 /**
  * Get a random user-id for use in livechat.
  * @returns {string} The user-id that was made/retreived
  */
 function UID() {
-    if (localStorage["UID"] != null) {
+    if (localStorage["UID"] == "undefined") {
+        delete localStorage["UID"]
+    }
+    if (localStorage["UID"]) {
         return localStorage["UID"];
     } else {
-        if (socket.connected) {
-            localStorage["UID"] = socket.Id;
-            return socket.Id;
-        } else {
-            localStorage["UID"] = self.crypto.randomUUID();
-            return localStorage["UID"];
-        }
+        localStorage["UID"] = generateUUID();
+        return localStorage["UID"];
     }
 }
+
+window.genUID = UID;
 
 /**
  * Adds a message to the livechat log.
@@ -200,7 +218,7 @@ socket.on("connect", OnConnection);
  * @param {string} Content The message to be sent.
  */
 function sendMessage(Content) {
-    let message = new Message(userName, UID(), Content, 0);
+    let message = new Message(USR, UID(), Content, 0);
     socket.emit("message", message.Serialize());
 }
 
@@ -219,8 +237,8 @@ LivechatInput.addEventListener("keypress", function (ev) {
                 // Set variables
                 LivechatLog.innerHTML = "";
                 hasSetName = true;
-                userName = LivechatInput.value;
-                localStorage["userName"] = userName;
+                USR = LivechatInput.value;
+                localStorage["USR"] = USR;
                 // Clear value and set placeholder
                 LivechatInput.value = "";
                 LivechatInput.placeholder = "Send a message.";
@@ -243,5 +261,5 @@ if (!hasSetName) {
 }
 
 // # NAMING
-hasSetName = localStorage["userName"] != null;
-userName = localStorage["userName"];
+hasSetName = localStorage["USR"] != null;
+USR = localStorage["USR"];
