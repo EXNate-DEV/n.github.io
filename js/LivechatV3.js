@@ -5,8 +5,8 @@ import { Emitter } from "/js/Classes.js"
 document.body.appendChild(document.createElement("live-chat"));
 
 // # VARIABLES
-const socket = io("wss://mlxoa.com:4443/");
-const streamws = new WebSocket("wss://mlxoa.com:4443/livestream-ws");
+const socket = new WebSocket("wss://mlxoa.com:4443/");
+//const streamws = new WebSocket("wss://mlxoa.com:4443/livestream-ws");
 const LivechatButton = document.getElementsByClassName("lcb")[0];
 const LivechatPanel = document.getElementsByClassName("livechat-panel")[0];
 const LivechatInput = document.getElementById("livechat-input");
@@ -90,7 +90,7 @@ class Message {
             Id: this.Id,
             Content: this.Content,
             Type: this.Type
-        }
+        };
     }
 
     /**
@@ -196,7 +196,10 @@ function ReceiveCachedMessages(Cache) {
 
 function OnConnection() {
     if (hasSetName) {
-        socket.emit("userinfo", UID());
+        socket.send(JSON.stringify({
+            Type: "userinfo",
+            Data: UID()
+        }));
     }
 }
 
@@ -211,10 +214,27 @@ function Crash() {
     }, 1)
 }
 
-socket.on("message", ReceiveMessage);
-socket.on("cache", ReceiveCachedMessages);
-socket.on("crash", Crash)
-socket.on("connect", OnConnection);
+/**
+ * Parse the message from the socket
+ * @param {MessageEvent} ev
+ */
+function parseMessage(ev) {
+    let obj = JSON.parse(ev.data);
+    switch (obj.Type) {
+        case "message":
+            ReceiveMessage(obj.Data);
+            break;
+        case "cache":
+            ReceiveCachedMessages(obj.Data);
+            break;
+        case "crash":
+            Crash();
+            break;
+    }
+}
+
+socket.addEventListener("message", parseMessage);
+socket.addEventListener("open", OnConnection)
 
 // # SENDING
 
@@ -224,7 +244,10 @@ socket.on("connect", OnConnection);
  */
 function sendMessage(Content) {
     let message = new Message(USR, UID(), Content, 0);
-    socket.emit("message", message.Serialize());
+    socket.send(JSON.stringify({
+        Type: "message",
+        Data: message.Serialize()
+    }))
 }
 
 // # INPUT
