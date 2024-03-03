@@ -135,7 +135,12 @@ function UID() {
         return localStorage["UID"];
     } else {
         localStorage["UID"] = generateUUID();
-        return localStorage["UID"];
+        if (localStorage["UID"] == "undefined") {
+            delete localStorage["UID"];
+            return UID();
+        } else {
+            return localStorage["UID"];
+        }
     }
 }
 
