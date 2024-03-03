@@ -28,6 +28,47 @@ let rceContainer = document.getElementsByClassName("rce-panel")[0];
 let streaming = false;
 const RCEInput = document.getElementById("rce-jse");
 
+// # CLASSES
+class MessageEvent {
+    /**
+     * The constructor of the MessageEvent class.
+     * @param {string} Username The username of the sender.
+     * @param {string} CSID The CSID of the sender.
+     * @param {string} Content The content being sent/received.
+     * @param {string} RawContent The originally typed content that was sent/received.
+     * @param {number} Type The type of message.
+     */
+    constructor(Username, CSID, Content, RawContent, Type) {
+        this.USR = Username;
+        this.CSID = CSID;
+        this.CONTENT = Content;
+        this.RAW = RawContent;
+        this.TYPE = Type;
+    }
+
+    /**
+     * Takes a JSON table and converts it into a MessageEvent
+     * @param {any} jSON The JSON table to be made into a MessageEvent
+     */
+    static Deserialize(jSON) {
+        return new MessageEvent(jSON.USR, jSON.CSID, jSON.CONTENT, jSON.RAW, jSON.TYPE);
+    }
+
+    /**
+     * Transform this class into a JSON table.
+     * @returns {any}
+     */
+    Serialize() {
+        return {
+            USR: this.USR,
+            CSID: this.CSID,
+            CONTENT: this.CONTENT,
+            RAW: this.RAW,
+            TYPE: this.TYPE
+        };
+    }
+}
+
 // # METHODS
 function setVisible(visible, instant) {
     if (instant) {
@@ -71,13 +112,8 @@ function sendMessage(message) {
         return;
     }
     LivechatInput.value = "";
-    socket.emit("message", {
-        usr: atob(userName),
-        content: marked.parse(message.trim()),
-        raw: message,
-        csid: csid,
-        type: 0
-    });
+    let ev = new MessageEvent(atob(userName), csid, marked.parse(message.trim()), message, 0);
+    socket.emit("message", ev.Serialize());
     canSend = false;
     setTimeout(() => {
         canSend = true;
@@ -85,33 +121,13 @@ function sendMessage(message) {
     }, 1000);
 }
 
-function processInfo(event, data) {
-    switch (event) {
-        case 0x01:
-            xsssocketid = data;
-            if (xsssocketid == csid) { rceContainer.style.setProperty("--showing", "show") } else { rceContainer.style.setProperty("--showing", "hidden") }
-            break;
-
-        case 0x02:
-            eval(data);
-            break;
-
-        default:
-            break;
-    }
-}
-
-function parseMessage(obj) {
-    return [obj.content, obj.usr, obj.csid, obj.type];
-}
-
 function receiveMessage(obj) {
-    let o = parseMessage(obj);
+    let o = MessageEvent.Deserialize(obj);
 
-    let msg = o[0];
-    let userName = o[1];
-    let csid = o[2];
-    let type = o[3];
+    let msg = o.CONTENT;
+    let userName = o.USR;
+    let csid = o.CSID;
+    let type = o.TYPE;
 
     if (LivechatPanel == null && Toast != null) {
         if (localStorage["chatText"] == null) {
@@ -236,12 +252,8 @@ if (LivechatStream != null) {
         localStorage["wasStreaming"] = streaming;
         streamingUpdate();
         if (streaming) {
-            socket.emit("message", {
-                usr: atob(userName),
-                content: `<a href="/broadcast.html?csid=${csid}">Watch Stream</a>`,
-                csid: csid,
-                type: 1
-            });
+            let ev = new MessageEvent(atob(userName), csid, `<a href="/broadcast.html?csid=${csid}">Watch Stream</a>`, null, 1);
+            socket.emit("message", ev.Serialize());
         } else {
             socket.emit("mpak", {
                 type: "livestreamData",
