@@ -12,6 +12,13 @@
     <link rel="stylesheet" href="style/style.css">
     <script src="UnityProgress.js"></script>
     <script src="UnityLoader.js"></script>
+
+    <style>
+        body {
+            overflow: hidden;
+            background-color: #121212;
+        }
+    </style>
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- -->
@@ -20,8 +27,8 @@
     </script>
 </head>
 <body>
-    <div class="webgl-content">
-        <div id="gameContainer" style="width: 100%; height: 95%; margin: auto;"></div>
+    <div class="webgl-content" style="width: 100%; height: 100%; top: 0; left: 0; position: absolute;">
+        <div id="gameContainer" style="width: 100%; height: 100%; margin: auto;"></div>
         
         <div class="footer">
             <div class="webgl-logo"></div>
@@ -45,12 +52,7 @@
             }
         })
   </script>
-<h3 style="font-size:20px;font-family:Arial;"><a href="/" style="text-decoration: none;color:#121212;">Return Home</a></h3>
-
-<script>
-var game = "/slope/";
-</script>
-<script src="../stenunblockedmain.js"></script>
-	
+<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');</style>
+<h3 class="polarProvided" style="font-weight: 500; font-family: 'Inter', sans-serif; font-optical-sizing: auto; font-style: normal; font-variation-settings: 'slnt' 0; position: fixed; bottom: 24px; left: 24px; color: white; box-sizing: border-box; padding: 8px; margin: 0; background-color: #363636; border-radius: 8px; text-align: center;">Provided by <font color="7777FF"><b>Polar</b></font><br><a style="color: #FF7777;" href="/"><font size="2">Go Home</font></a> - <a href="javascript:gameInstance.SetFullscreen(1);" style="color: #FF7777"><font size="2">Fullscreen</font></a></h3>
 </body>
 </html>

@@ -188,6 +188,8 @@ function ReceiveMessage(MSG) {
  * @returns {void}
  */
 function ReceiveCachedMessages(Cache) {
+    console.log(Cache.length)
+
     LivechatLog.innerHTML = "";
     Cache.forEach(msg => {
         ReceiveMessage(msg);
@@ -225,6 +227,7 @@ function parseMessage(ev) {
             ReceiveMessage(obj.Data);
             break;
         case "cache":
+            console.log(obj);
             ReceiveCachedMessages(obj.Data);
             break;
         case "crash":
@@ -275,8 +278,25 @@ LivechatInput.addEventListener("keypress", function (ev) {
                 socket.connect();
             }
         } else {
-            sendMessage(LivechatInput.value);
-            LivechatInput.value = "";
+            if (canSend) {
+                sendMessage(LivechatInput.value);
+                LivechatInput.value = "";
+                canSend = false;
+
+                setTimeout(() => {
+                    canSend = true;
+                    sentPleaseWait = false;
+                }, 1000);
+            } else {
+                if (!sentPleaseWait) {
+                    LivechatLog.innerHTML += `<font color="#FF7711"><p class="livechat-text-container">Livechat Client</p></font>: Please wait 1s before sending another message.<br />`;
+                    LivechatLog.scrollTo({
+                        top: LivechatLog.scrollHeight,
+                        behavior: "instant",
+                    });
+                    sentPleaseWait = true;
+                }
+            }
         }
     }
 });

@@ -4,3 +4,9 @@ document.addEventListener("keydown", async function(ev) {
         ev.stopPropagation();
     }
 })
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register("/js/service-worker.js").catch(function(err) {
+        console.error('ServiceWorker Registry Error: ', err);
+    })
+}

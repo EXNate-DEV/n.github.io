@@ -1,0 +1,12 @@
+{
+    "name": "Polar",
+    "icons": [
+      {
+        "src": "assets/72x72.png",
+        "type": "image/png",
+        "sizes": "72x72"
+      }
+    ],
+    "start_url": "/",
+    "display": "standalone"
+  }
