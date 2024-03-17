@@ -420,7 +420,7 @@ LiveWorker.addEventListener('message', function (ev) {
  * @param {string} Content The message to be sent.
  */
 function sendMessage(Content) {
-    let message = new Message(USR, UID(), Content, 0);
+    let message = new Message(USR, UID(), 0, Content, 0);
     socket.send(JSON.stringify({
         Type: "message",
         Data: message.Serialize()
