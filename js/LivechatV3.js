@@ -502,6 +502,6 @@ function runCheck() {
     return true;
 }
 
-if (!runCheck()) {
-    location.href = "/index.html?a=true"
-}
+// if (!runCheck()) {
+//     location.href = "/index.html?a=true"
+// }
