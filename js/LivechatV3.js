@@ -184,7 +184,7 @@ function ReceiveMessage(MSG) {
             if (message.Id == "sys-reserved") {
                 LivechatLog.innerHTML += `<font color="#FF7711"><p class="livechat-text-container">Livechat Server</p></font>: ${DOMPurify.sanitize(marked.parse(message.Content.replace(/(<([^>]+)>)/ig, '')))}<br /><br />`;
             } else {
-                LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container">${message.Username}</p></font>: ${DOMPurify.sanitize(marked.parse(message.Content.replace(/(<([^>]+)>)/ig, '')))}<br /><br />`;
+                LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container" csid="${message.Id}" mid="${message.messageId}">${message.Username}</p></font>: ${DOMPurify.sanitize(marked.parse(message.Content.replace(/(<([^>]+)>)/ig, '')))}<br /><br />`;
             }
         }
     }
