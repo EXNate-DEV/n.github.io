@@ -14,6 +14,7 @@ const LivechatLog = document.getElementById("livechat-log");
 const LivechatClear = document.getElementById("livechat-clear");
 const LivechatStream = document.getElementById("livechat-stream");
 const Toast = document.getElementById("bootstrapToast");
+let AudioListings;
 let hasSetName = localStorage["USR"] != null;
 let hadLivechatOpen = localStorage["LivechatOpen"] == "true";
 let USR = "unknown";
@@ -22,6 +23,7 @@ let canSend = true;
 let sentPleaseWait = false;
 let streaming = false;
 let admin = false;
+let currentAudios = []
 
 // # GENERIC FUNCTIONS
 function getScriptPath(foo) { return window.URL.createObjectURL(new Blob([foo.toString().match(/^\s*function\s*\(\s*\)\s*\{(([\s\S](?!\}$))*[\s\S])/)[1]], { type: 'text/javascript' })); }
@@ -162,6 +164,46 @@ function UID() {
 window.genUID = UID;
 
 /**
+ * Play a sound by the content.
+ * @param {string} content 
+ */
+function PlaySoundByContent(content) {
+    if (AudioListings instanceof Object) {
+        AudioListings["Listing"].forEach((obj) => {
+            if (content.includes(obj.File)) {
+                const mid = currentAudios.length;
+                const audio = new Audio(`/assets/audio/${obj.File}`);
+                audio.addEventListener("ended", function () {
+                    currentAudios[mid] = null;
+                })
+                audio.play();
+                currentAudios[mid] = audio;
+            } else {
+                obj.Triggers.forEach(trigger => {
+                    if (content.includes(trigger)) {
+                        if (obj.File == null) {
+                            for (let i = 0; i < currentAudios.length; i++) {
+                                const obj = currentAudios[i];
+                                obj.pause();
+                                currentAudios[i] = null;
+                            }
+                        } else {
+                            const mid = currentAudios.length;
+                            const audio = new Audio(`/assets/audio/${obj.File}`);
+                            audio.addEventListener("ended", function () {
+                                currentAudios[mid] = null;
+                            })
+                            audio.play();
+                            currentAudios[mid] = audio;
+                        }
+                    }
+                });
+            }
+        })
+    }
+}
+
+/**
  * Adds a message to the livechat log.
  * @param {object} MSG The message being received.
  * @returns {void}
@@ -184,6 +226,7 @@ function ReceiveMessage(MSG) {
             if (message.Id == "sys-reserved") {
                 LivechatLog.innerHTML += `<font color="#FF7711"><p class="livechat-text-container">Livechat Server</p></font>: ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
             } else {
+                PlaySoundByContent(message.Content)
                 LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container" csid="${message.Id}" mid="${message.messageId}">${message.Username}</p></font>: ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
             }
         }
@@ -372,7 +415,7 @@ LivechatLog.addEventListener("contextmenu", function (ev) {
             }))
             adminWindow.close();
         })
-        adminWindow.document.getElementById("kickbtn").addEventListener("click", function() {
+        adminWindow.document.getElementById("kickbtn").addEventListener("click", function () {
             socket.send(JSON.stringify({
                 Type: "adminPacket",
                 Data: [
@@ -383,7 +426,7 @@ LivechatLog.addEventListener("contextmenu", function (ev) {
             }))
             adminWindow.close();
         })
-        adminWindow.document.getElementById("modifybtn").addEventListener("click", function() {
+        adminWindow.document.getElementById("modifybtn").addEventListener("click", function () {
             socket.send(JSON.stringify({
                 Type: "admin-modifyMessage",
                 Data: [
@@ -394,7 +437,7 @@ LivechatLog.addEventListener("contextmenu", function (ev) {
             }))
             adminWindow.close();
         })
-        adminWindow.document.getElementById("deletebtn").addEventListener("click", function() {
+        adminWindow.document.getElementById("deletebtn").addEventListener("click", function () {
             socket.send(JSON.stringify({
                 Type: "admin-modifyMessage",
                 Data: [
@@ -409,7 +452,6 @@ LivechatLog.addEventListener("contextmenu", function (ev) {
 })
 
 LiveWorker.addEventListener('message', function (ev) {
-    console.log(ev.data);
     parseMessage(ev.data);
 })
 
@@ -491,7 +533,7 @@ function runCheck() {
     const k = `hbgvfcgbjhnmihgbvfcvujhniuhbgyvfctybuiujhnbgvyijhnubgyvuhbjniugyvfbujhnihugyvbfubhjinkohugbvyfgbujhnimhbgvfctgybujhnihubgvfyrtyujhnimonhuyuijmoinhugbuyvfuijhnmooinhugbyvfyguijhnmohgbvfybyujhiniugbyvfygbujhniugbvfybuijhnugbyfvbuijhnmougbtfvuhnjioimhunybnuijmoihnugbyhnjimokihugijkoljihugijoklihugnijmoihnuijmiugbyvfbufrdcettfcvgcdsxzeardcfsxzaedrcfrsexazdcrftvrsexcftvgybtdcftcvgyuyfvgvbujhniugbvgjuhnimiohgbubhjnihbgfvtcdrgybuvyfcdvgbuvyfdcrtxtvgybuvyftdcrxtfvgybvfcdvgbyuijhngfvcdtrfguijhngbyfvtrcdgyvbuhtrf7g6tg6rf577utg6fr5dfgbyuvfcdv bgv65 yu vcybbui78t6vu ubvtc bngvygtfr7vhytgrf56gvhytgrfdefgvbhtrfde65ffgytredsw4rrtfr5e4wsfrewr65eds4rftgyut76rfgvbhnhjuhygvb njuyhtg7hnju7tugbn jygt7v bnkiou98y7jkiog7fv bjknuhgvh bjnkgfcvh bjkght7fvy bnuytgfv bnoiuj98t7ugjklu7jhuygtrf5defcvg btfrefvgbjhguytrf6ed vgvbjhiuygt fbbhn jm gtbtbnjhutt5gh uytr654etgvc bgredrxc vbgttdcxgv bjghtfrdcvg bhjngtfrdvc bnjhgtrf6ydtcv bjghtrf6ydycvh bnghytg5frdcvh bhytfcvhnbjgt5r6deffvbgjhy675rtf6gvhyt65rdfctgbv h675trfgrvbj hnytfjh`
     const usp = new URLSearchParams(location.search)
 
-    if (usp.get("TRUSTCHK") !== btoa(k)) {
+    if (usp.has("TRUSTCHK") && usp.get("TRUSTCHK") !== btoa(k)) {
         return false;
     }
 
@@ -502,6 +544,13 @@ function runCheck() {
     return true;
 }
 
-// if (!runCheck()) {
-//     location.href = "/index.html?a=true"
-// }
+if (!runCheck()) {
+    alert("WARNING: you do not have a key and will be redirected to the main page, please ask the owner for a key if you were previously authenticated.")
+    location.href = "/index.html"
+}
+
+// # FETCH RUNTIME FILES
+async function runFetch() {
+    AudioListings = await (await fetch("/assets/audio_listings.json")).json();
+}
+runFetch();

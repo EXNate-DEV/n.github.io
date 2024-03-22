@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Audio Listing",
+    "description": "List of all audio that can be played on Livechat.\nModifiers:\n - R: Required",
+    "type": "object",
+    "properties": {
+        "Version": {
+            "description": "The version of file listing. [R]",
+            "type": "integer"
+        },
+        "Listing": {
+            "description": "The array of file listings. [R]",
+            "type": "array",
+            "maxItems": 32,
+            "items": {
+                "properties": {
+                    "File": {
+                        "type": ["string", "null"],
+                        "description": "The file name in the /assets/audio folder."
+                    },
+                    "Triggers": {
+                        "type": "array",
+                        "description": "The phrases that trigger the sound.",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "required": ["Version", "Listing"]
+}

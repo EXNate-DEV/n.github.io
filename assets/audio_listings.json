@@ -1,0 +1,51 @@
+{
+    "$schema": "https://raw.githubusercontent.com/EXNate-DEV/Schema/main/Livechat/audio_listings.json",
+    "Version": 1,
+    "Listing": [
+        {
+            "File": "avocados_from_mexico.mp3",
+            "Triggers": [
+                "avocado",
+                "avocados"
+            ]
+        },
+        {
+            "File": "never_gonna_give_you_up.mp3",
+            "Triggers": [
+                "rickroll",
+                "never gonna give you up",
+                "rick"
+            ]
+        },
+        {
+            "File": "roblox_tycoon.mp3",
+            "Triggers": [
+                "tycoon",
+                "roblox tycoon",
+                "average roblox music"
+            ]
+        },
+        {
+            "File": "halo_theme_song.m4a",
+            "Triggers": [
+                "halo"
+            ]
+        },
+        {
+            "File": "portal_radio.mp3",
+            "Triggers": [
+                "radio"
+            ]
+        },
+        {
+            "File": null,
+            "Triggers": [
+                "stop",
+                "stawp",
+                "plz stop",
+                "pls stop",
+                "stop!"
+            ]
+        }
+    ]
+}
