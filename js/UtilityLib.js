@@ -33,6 +33,9 @@ export class Prompt {
                 st.style = "display: block;"
                 st.innerHTML = that.subtitle;
 
+                let hr = document.createElement("hr");
+                hr.style = "display: block;"
+
                 let yes = document.createElement("button");
                 yes.innerText = "Yeah";
                 yes.className = that.danger ? "btn btn-danger" : "btn btn-primary";
@@ -90,6 +93,9 @@ export class Prompt {
                 st.style = "display: block;"
                 st.innerHTML = that.subtitle;
 
+                let hr = document.createElement("hr");
+                hr.style = "display: block;"
+
                 let yes = document.createElement("button");
                 yes.innerText = "Continue";
                 yes.className = that.danger ? "btn btn-danger" : "btn btn-primary";
@@ -146,6 +152,9 @@ export class Prompt {
                 let st = document.createElement("p");
                 st.style = "display: block;"
                 st.innerHTML = that.subtitle;
+
+                let hr = document.createElement("hr");
+                hr.style = "display: block;"
 
                 let yes = document.createElement("button");
                 yes.innerText = "Ok";
