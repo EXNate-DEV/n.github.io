@@ -10,9 +10,9 @@ class Livechat extends HTMLElement {
 <div class="livechat-panel">
     <p id="livechat-log"></p>
     <input type="text" class="form-control" id="livechat-input" autocomplete="off" />
-    <div class="livechat-options">
-        <button class="btn btn-danger" id="livechat-stream" title="Share the game you are currently playing to anyone."><i class="bi bi-broadcast"></i></button>
-        <button class="btn btn-success" id="livechat-clear" title="Clear the chat. [This is currently broken in Livechat v2.02]"><i class="bi bi-trash"></i></button>
+    <div class="livechat-options d-flex mb-3">
+        <button class="btn btn-danger align-self-center" id="livechat-stream" title="Share the game you are currently playing to anyone."><i class="bi bi-broadcast"></i></button>
+        <div class="float-end align-self-center ms-auto" id="livechat-usersonline">N/A users online.</div>
     </div>
 </div>
 <div class="modal" tabindex="-1" id="configmodal">

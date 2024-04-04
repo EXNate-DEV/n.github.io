@@ -11,6 +11,7 @@ const LivechatButton = document.getElementsByClassName("lcb")[0];
 const LivechatPanel = document.getElementsByClassName("livechat-panel")[0];
 const LivechatInput = document.getElementById("livechat-input");
 const LivechatLog = document.getElementById("livechat-log");
+const LivechatUO = document.getElementById("livechat-usersonline");
 const LivechatClear = document.getElementById("livechat-clear");
 const LivechatStream = document.getElementById("livechat-stream");
 const Toast = document.getElementById("bootstrapToast");
@@ -554,3 +555,15 @@ async function runFetch() {
     AudioListings = await (await fetch("/assets/audio_listings.json")).json();
 }
 runFetch();
+
+// # SERVER DATA
+async function getServerData() {
+    return (await fetch("https://mlxoa.com:4443/"))
+}
+async function updateChat() {
+    const serverData = await (await getServerData()).json();
+    if (serverData["usersOnline"]) {
+        LivechatUO.innerText = `${serverData["usersOnline"]} users online`
+    }
+}
+setInterval(updateChat, 10000);
