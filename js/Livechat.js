@@ -563,7 +563,7 @@ async function getServerData() {
 async function updateChat() {
     const serverData = await (await getServerData()).json();
     if (serverData["usersOnline"]) {
-        LivechatUO.innerText = `${serverData["usersOnline"]} users online`
+        LivechatUO.innerText = `${serverData["usersOnline"]} user(s) online`
     }
 }
-setInterval(updateChat, 10000);
+setInterval(updateChat, 250);
