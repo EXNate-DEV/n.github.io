@@ -354,8 +354,7 @@ async function ReceiveWebRTCC(data) {
     switch (data.evType) {
         case "open": {
             if (peerConnections[sender]) {
-                peerConnections[sender].close();
-                delete peerConnections[sender]
+                return
             }
             peerConnections[sender] = new RTCPeerConnection({
                 iceServers: [
@@ -405,10 +404,9 @@ async function ReceiveWebRTCC(data) {
                 }))
             }
             peerConnections[sender].onconnectionstatechange = function () {
-                switch (peerConnections[sender].connectionState) {
-                    case "closed":
-                        delete peerConnections[sender]
-                        break;
+                if (peerConnections[sender] === undefined || peerConnections[sender].connectionState === "closed" || peerConnections[sender].connectionState === "disconnected") {
+                    console.log("lost connection")
+                    delete peerConnections[sender]
                 }
             }
             peerConnections[sender].onnegotiationneeded = function(ev) {
@@ -620,12 +618,20 @@ LiveWorker.addEventListener('message', function (ev) {
     parseMessage(ev.data);
 })
 
+let db = false
+
 LivechatStream.onclick = function () {
-    let message = new Message(USR, UID(), 0, "", 1);
-    socket.send(JSON.stringify({
-        Type: "message",
-        Data: message.Serialize()
-    }))
+    if (!db) {
+        db = true
+        let message = new Message(USR, UID(), 0, "", 1);
+        socket.send(JSON.stringify({
+            Type: "message",
+            Data: message.Serialize()
+        }))
+        setTimeout(function () {
+            db = false
+        }, 30000)
+    }
 }
 
 // # SENDING
@@ -752,8 +758,17 @@ setInterval(updateChat, 500);
 
 setTimeout(createSocket, 500);
 
-document.addEventListener("beforeunload", (ev) => {
-    peerConnections.forEach((peer) => {
+document.body.onbeforeunload = (ev) => {
+    peerConnections.forEach((peer, i) => {// Close each track
+        peer.getTracks().forEach(track => {
+            track.stop();
+        });
+        peer.ontrack = null;
+        peer.onicecandidate = null;
+        peer.oniceconnectionstatechange = null;
+        peer.onsignalingstatechange = null;
         peer.close();
     })
-})
+
+    peerConnections = []
+}

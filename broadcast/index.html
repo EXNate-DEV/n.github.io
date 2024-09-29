@@ -35,7 +35,7 @@
 
 <body data-bs-theme="dark">
     <video style="position: fixed; image-rendering: pixelated; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 100%; max-height: 100%; object-fit:contain; width: 80%; height: 80%;"
-        id="i"></video>
+        id="i" autoplay controls></video>
     <h3 id="text" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"></h3>
     <div class="bottombuttons">
         <button class="btn btn-outline-secondary lcb">Live Chat</button>
@@ -65,21 +65,6 @@
             if (!streamer) {
                 document.getElementById("i").srcObject = ev.streams[0];
                 document.getElementById("i").play()
-            }
-        })
-        LiveAPI.registerPeerEvent("connectionstatechange", (streamer, peer, ev) => {
-            if (!streamer) {
-                if (peer.connectionState == "closed") {
-                    socket.send(JSON.stringify({
-                        Type: "wrtc",
-                        Target: search.get("csid"),
-                        Data: {
-                            evType: "open",
-                            Sender: genUID(),
-                            streamer: true
-                        }
-                    }))
-                }
             }
         })
     </script>
