@@ -422,6 +422,7 @@ async function ReceiveWebRTCC(data) {
                     }))
                 })
             }
+            peerConnections[sender].onnegotiationneeded(null)
             break;
         }
         case "offer": {
