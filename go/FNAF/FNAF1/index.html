@@ -92,7 +92,7 @@ b {
 	
   	<!-- EXTRASOURCES -->
     <!-- Loads the Javascript code...-->
-  	<script src="src/Runtime.js"></script>
+  	<script src="/go/FNAF/FNAF1/src/Runtime.js"></script>
   
     </script>
 
@@ -121,14 +121,14 @@ b {
 	        // First parameter : name of the canvas element
 	        // Second parameter : path to the cch file. Images and sounds must lay beside this file
 			window.gameCanvas = document.getElementById("MMFCanvas")
-	        window.runtime = new Runtime("MMFCanvas", "resources/FNAF1.cch");
+            window.mediaStream = gameCanvas.captureStream(60);
+	        window.runtime = new Runtime("MMFCanvas", "/go/FNAF/FNAF1/resources/FNAF1.cch");
 	    }
 	    // RUNTIMESTARTEND
     </script>
 
     <h1 align="center">Five Nights At Freddy's</h1>
     <h5 align="center">This is the <b>original</b> version of FNAF.</h5>
-	<center><button class="btn btn-outline-secondary">1v1 Night (ALPHA)</button></center>
     <div class="bottombuttons">
 		<button class="btn btn-outline-secondary lcb">Live Chat</button>
         <button class="btn btn-outline-secondary" onclick="location.pathname = '/'">Return Home</button>
@@ -136,6 +136,5 @@ b {
     </div>
         
 	<script type="module" src="/js/Livechat.js"></script>
-	<script src="1v1night.js"></script>
 </body>
 </html>

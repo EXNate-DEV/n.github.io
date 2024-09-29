@@ -34,8 +34,8 @@
 </head>
 
 <body data-bs-theme="dark">
-    <img style="position: fixed; image-rendering: pixelated; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 100%; max-height: 100%;"
-        id="i">
+    <video style="position: fixed; image-rendering: pixelated; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 100%; max-height: 100%; object-fit:contain; width: 80%; height: 80%;"
+        id="i"></video>
     <h3 id="text" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"></h3>
     <div class="bottombuttons">
         <button class="btn btn-outline-secondary lcb">Live Chat</button>
@@ -43,31 +43,46 @@
         <button class="btn btn-outline-secondary"
             onclick="document.getElementById('i').requestFullscreen()">Fullscreen</button>
     </div>
+    <script type="module" src="/js/Livechat.js"></script>
     <script type="module">
-        import { io } from "socket.io-client";
-        const streamws = new WebSocket("wss://mlxoa.com:4443/livestream-ws");
         const search = new URLSearchParams(location.search);
         const text = document.getElementById("text");
         if (!search.get("csid")) {
             location.pathname = "/"
         }
-        streamws.addEventListener("message", function (ev) {
-            let obj = JSON.parse(ev.data)
-            if (obj.type == "livestreamData") {
-                if (obj.csid == decodeURIComponent(search.get("csid"))) {
-                    if (obj.data != null) {
-                        document.getElementById("i").src = obj.data[0];
-                        document.getElementById("i").style.width = obj.data[1];
-                        document.getElementById("i").style.height = obj.data[2];
-                    } else {
-                        document.getElementById("i").src = "";
-                    }
-                    text.innerText = obj.errormsg;
+        LiveAPI.registerSocketOpenEvent(() => {
+            socket.send(JSON.stringify({
+                Type: "wrtc",
+                Target: search.get("csid"),
+                Data: {
+                    evType: "open",
+                    Sender: genUID(),
+                    streamer: true
+                }
+            }))
+        })
+        LiveAPI.registerPeerEvent("track", (streamer, peer, ev) => {
+            if (!streamer) {
+                document.getElementById("i").srcObject = ev.streams[0];
+                document.getElementById("i").play()
+            }
+        })
+        LiveAPI.registerPeerEvent("connectionstatechange", (streamer, peer, ev) => {
+            if (!streamer) {
+                if (peer.connectionState == "closed") {
+                    socket.send(JSON.stringify({
+                        Type: "wrtc",
+                        Target: search.get("csid"),
+                        Data: {
+                            evType: "open",
+                            Sender: genUID(),
+                            streamer: true
+                        }
+                    }))
                 }
             }
         })
     </script>
-    <script type="module" src="/js/Livechat.js"></script>
 </body>
 
 </html>

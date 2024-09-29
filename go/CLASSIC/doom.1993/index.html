@@ -134,6 +134,7 @@
             emulators.pathPrefix = "/js/EMULATOR/DOS/";
             Dos(document.getElementById("canvas")).run(`${location.protocol}//${location.host}/go/CLASSIC/doom.1993/bundle.jsdos`)
 			window.gameCanvas = document.getElementById("cfxnes")
+            window.mediaStream = gameCanvas.captureStream(60);
         </script>
     </body>
 </html>

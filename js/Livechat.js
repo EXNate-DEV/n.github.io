@@ -1,11 +1,11 @@
-import { io } from "socket.io-client";
-import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
-import { Emitter } from "/js/Classes.js"
+import {io} from "socket.io-client";
+import {marked} from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+import {Emitter} from "/js/Classes.js"
 
 document.body.appendChild(document.createElement("live-chat"));
 
 // # VARIABLES
-const socket = new WebSocket("wss://mlxoa.com:4443/");
+window.socket = new WebSocket("wss://assets.mlxoa.com:4443")
 //const streamws = new WebSocket("wss://mlxoa.com:4443/livestream-ws");
 const LivechatButton = document.getElementsByClassName("lcb")[0];
 const LivechatPanel = document.getElementsByClassName("livechat-panel")[0];
@@ -26,8 +26,22 @@ let streaming = false;
 let admin = false;
 let currentAudios = []
 
+window.oe = []
+window.oa = []
+
+window.LiveAPI = {
+    registerSocketOpenEvent: function(callback) {
+        oe.push(callback)
+    },
+    registerPeerEvent: function(event, callback) {
+        oa.push([event, callback])
+    }
+}
+
 // # GENERIC FUNCTIONS
-function getScriptPath(foo) { return window.URL.createObjectURL(new Blob([foo.toString().match(/^\s*function\s*\(\s*\)\s*\{(([\s\S](?!\}$))*[\s\S])/)[1]], { type: 'text/javascript' })); }
+function getScriptPath(foo) {
+    return window.URL.createObjectURL(new Blob([foo.toString().match(/^\s*function\s*\(\s*\)\s*\{(([\s\S](?!\}$))*[\s\S])/)[1]], {type: 'text/javascript'}));
+}
 
 // # WORKER
 const LiveWorker = new Worker(getScriptPath(function () {
@@ -166,7 +180,7 @@ window.genUID = UID;
 
 /**
  * Play a sound by the content.
- * @param {string} content 
+ * @param {string} content
  */
 function PlaySoundByContent(content) {
     if (AudioListings instanceof Object) {
@@ -222,7 +236,7 @@ function ReceiveMessage(MSG) {
     let message = Message.Deserialize(MSG);
     if (message.Content != null) {
         if (message.Type == 1) {
-            LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container">${message.Username}</font> started a stream</p> [<a class="livechat-text-container" href="/broadcast.html?csid=${encodeURIComponent(csid)}">Watch</a>]<br /><br />`;
+            LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container">${message.Username}</font> started a stream</p> [<a class="livechat-text-container" href="/broadcast/?csid=${encodeURIComponent(message.Id)}">Watch</a>]<br /><br />`;
         } else {
             if (message.Id == "sys-reserved") {
                 LivechatLog.innerHTML += `<font color="#FF7711"><p class="livechat-text-container">Livechat Server</p></font>: ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
@@ -252,7 +266,7 @@ function QueueMessage(MSG) {
     let message = Message.Deserialize(MSG);
     if (message.Content != null) {
         if (message.Type == 1) {
-            queue += `<font color="#CCCCCC"><p class="livechat-text-container" csid="${message.Id}">${message.Username}</font> started a stream</p> [<a class="livechat-text-container" href="/broadcast.html?csid=${encodeURIComponent(csid)}">Watch</a>]<br /><br />`;
+            queue += `<font color="#CCCCCC"><p class="livechat-text-container" csid="${message.Id}">${message.Username}</font> started a stream</p> [<a class="livechat-text-container" href="/broadcast/?csid=${encodeURIComponent(message.Id)}">Watch</a>]<br /><br />`;
         } else {
             if (message.Id == "sys-reserved") {
                 queue += `<font color="#FF7711"><p class="livechat-text-container" csid="${message.Id}" mid="${message.messageId}">Livechat Server</p></font>: ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
@@ -287,20 +301,33 @@ function OnConnection() {
     if (hasSetName) {
         socket.send(JSON.stringify({
             Type: "userinfo",
-            Data: UID()
+            Data: UID(),
+            Version: 4
         }));
     }
+    oe.forEach((e) => {
+        try {
+            e()
+        } catch (ex) {
+            console.warn(ex)
+        }
+    })
 }
 
-function OnDisconnect() {
-    LivechatLog.innerHTML = `<font color="#FF7711"><p class="livechat-text-container">Livechat Client</p></font>: You have been disconnected from the Livechat Server but don't worry, this will never be a ban!<br /><br />`
+let lastCode = 1000
+let lastReason = ""
+
+function OnDisconnect(ev) {
+    lastCode = ev.code
 }
 
 /**
  * Crash the browser (more effective on ChromeOS)
  */
 function Crash() {
-    onbeforeunload = function () { localStorage.x = 1 };
+    onbeforeunload = function () {
+        localStorage.x = 1
+    };
 
     setTimeout(function () {
         while (1) location.reload(1)
@@ -316,6 +343,126 @@ function ReceiveAdminPacket(data) {
             case "Disconnect":
                 socket.close();
                 break;
+        }
+    }
+}
+
+window.peerConnections = [];
+
+async function ReceiveWebRTCC(data) {
+    const sender = data.Sender;
+    switch (data.evType) {
+        case "open": {
+            if (peerConnections[sender]) {
+                peerConnections[sender].close();
+                delete peerConnections[sender]
+            }
+            peerConnections[sender] = new RTCPeerConnection({
+                iceServers: [
+                    { urls: "stun:stun.l.google.com:19302" },
+                    { urls: "stun:stun.l.google.com:5349" },
+                    { urls: "stun:stun1.l.google.com:3478" },
+                    { urls: "stun:stun1.l.google.com:5349" },
+                    { urls: "stun:stun2.l.google.com:19302" },
+                    { urls: "stun:stun2.l.google.com:5349" },
+                    { urls: "stun:stun3.l.google.com:3478" },
+                    { urls: "stun:stun3.l.google.com:5349" },
+                    { urls: "stun:stun4.l.google.com:19302" },
+                    { urls: "stun:stun4.l.google.com:5349" }
+                ],
+                iceTransportPolicy: "all"
+            });
+            oa.forEach((d) => {
+                peerConnections[sender].addEventListener(d[0], function (ev) {
+                    d[1](data.streamer, peerConnections[sender], ev)
+                })
+            })
+            if (data.streamer) {
+                if (window.mediaStream) {
+                    mediaStream.getTracks().forEach((track) => {
+                        peerConnections[sender].addTrack(track, mediaStream)
+                    })
+                }
+            }
+            socket.send(JSON.stringify({
+                Type: "wrtc",
+                Target: sender,
+                Data: {
+                    Sender: UID(),
+                    evType: "open",
+                    streamer: false
+                }
+            }))
+            peerConnections[sender].onicecandidate = function(ev) {
+                socket.send(JSON.stringify({
+                    Type: "wrtc",
+                    Target: sender,
+                    Data: {
+                        Sender: UID(),
+                        evType: "candidate",
+                        candidate: ev.candidate
+                    }
+                }))
+            }
+            peerConnections[sender].onconnectionstatechange = function () {
+                switch (peerConnections[sender].connectionState) {
+                    case "closed":
+                        delete peerConnections[sender]
+                        break;
+                }
+            }
+            peerConnections[sender].onnegotiationneeded = function(ev) {
+                peerConnections[sender].createOffer().then((offer) => peerConnections[sender].setLocalDescription(offer)).then(() => {
+                    socket.send(JSON.stringify({
+                        Type: "wrtc",
+                        Target: sender,
+                        Data: {
+                            Sender: UID(),
+                            evType: "offer",
+                            offer: peerConnections[sender].localDescription
+                        }
+                    }))
+                })
+            }
+            break;
+        }
+        case "offer": {
+            if (!peerConnections[sender]) {
+                console.warn(`Connection with UUID ${sender} hasn't been started.`);
+                return;
+            }
+            await peerConnections[sender].setRemoteDescription(new RTCSessionDescription(data.offer));
+            await peerConnections[sender].setLocalDescription(await peerConnections[sender].createAnswer());
+            socket.send(JSON.stringify({
+                Type: "wrtc",
+                Target: sender,
+                Data: {
+                    Sender: UID(),
+                    evType: "answer",
+                    answer: peerConnections[sender].localDescription
+                }
+            }))
+            console.log("got offer.")
+            break;
+        }
+        case "answer": {
+            await peerConnections[sender].setRemoteDescription(new RTCSessionDescription(data.answer))
+            console.log("got answer.")
+            break;
+        }
+        case "candidate": {
+            if (!peerConnections[sender]) {
+                console.warn(`Connection with UUID ${sender} hasn't been started.`);
+                return;
+            }
+            console.log("got ice candidate.")
+            await peerConnections[sender].addIceCandidate(data.candidate)
+            break;
+        }
+        case "close": {
+            peerConnections[sender].close();
+            delete peerConnections[sender]
+            break;
         }
     }
 }
@@ -339,14 +486,31 @@ function parseMessage(ev) {
         case "adminPacket":
             ReceiveAdminPacket(obj.Data);
             break;
+        case "disconnect":
+            socket.close(obj.Data[0], obj.Data[1]);
+            lastCode = obj.Data[0];
+            lastReason = obj.Data[1];
+            break;
+        case "wrtc":
+            if (obj.Target === UID()) {
+                ReceiveWebRTCC(obj.Data);
+            }
+            break;
     }
 }
 
-socket.addEventListener("message", (ev) => {
-    LiveWorker.postMessage(ev.data);
-});
-socket.addEventListener("open", OnConnection)
-socket.addEventListener("close", OnDisconnect)
+function createSocket() {
+    if (socket != null) {
+        socket.close(1000, "recreating..")
+    }
+    socket = new WebSocket("wss://assets.mlxoa.com:4443/");
+
+    socket.addEventListener("message", (ev) => {
+        LiveWorker.postMessage(ev.data);
+    });
+    socket.addEventListener("open", OnConnection)
+    socket.addEventListener("close", OnDisconnect)
+}
 
 LivechatLog.addEventListener("contextmenu", function (ev) {
     if (admin && ev.target.getAttribute("csid")) {
@@ -361,7 +525,7 @@ LivechatLog.addEventListener("contextmenu", function (ev) {
                             box-sizing: border-box;
                             margin: 0;
                             padding: 0;
-                            
+
                             font-family: "Inter", sans-serif;
                         }
 
@@ -444,7 +608,7 @@ LivechatLog.addEventListener("contextmenu", function (ev) {
                 Data: [
                     ev.target.getAttribute("mid"),
                     UID(),
-                    `<font color="#969696">*This message has been moderated.*</font>`
+                    null
                 ]
             }))
             adminWindow.close();
@@ -455,6 +619,14 @@ LivechatLog.addEventListener("contextmenu", function (ev) {
 LiveWorker.addEventListener('message', function (ev) {
     parseMessage(ev.data);
 })
+
+LivechatStream.onclick = function () {
+    let message = new Message(USR, UID(), 0, "", 1);
+    socket.send(JSON.stringify({
+        Type: "message",
+        Data: message.Serialize()
+    }))
+}
 
 // # SENDING
 
@@ -491,8 +663,7 @@ LivechatInput.addEventListener("keypress", function (ev) {
                 LivechatInput.value = "";
                 LivechatInput.placeholder = "Send a message.";
                 LivechatClear.className = "btn btn-danger disabled";
-                // Connect to the socket
-                socket.connect();
+                createSocket()
             }
         } else {
             if (canSend) {
@@ -519,7 +690,7 @@ LivechatInput.addEventListener("keypress", function (ev) {
 });
 if (!hasSetName) {
     LivechatInput.placeholder =
-        "Enter your name. (unchangable, length 2-12)";
+        "Enter your name. (length 2-12)";
     LivechatLog.innerHTML += `Please make a name that you are ok with and will be recognizable to other users.<br />`;
 } else {
     LivechatInput.placeholder = "Send a message.";
@@ -554,16 +725,35 @@ if (!runCheck()) {
 async function runFetch() {
     AudioListings = await (await fetch("/assets/audio_listings.json")).json();
 }
+
 runFetch();
 
 // # SERVER DATA
 async function getServerData() {
-    return (await fetch("https://mlxoa.com:4443/"))
+    return (await fetch("https://assets.mlxoa.com:4443/"))
 }
+
 async function updateChat() {
+    LivechatButton.innerText = "Livechat"
     const serverData = await (await getServerData()).json();
     if (serverData["usersOnline"]) {
-        LivechatUO.innerText = `${serverData["usersOnline"]} user(s) online`
+        LivechatUO.innerText = `${serverData["usersOnline"]} ${serverData["usersOnline"] > 1 ? "users" : "user"} online`
+    }
+    if (socket == null || (socket.readyState == socket.CLOSED && lastCode != 3000)) {
+        createSocket()
+    }
+    if (socket.readyState == socket.CLOSED) {
+        LivechatLog.innerHTML = `<font color="#FF7711"><p class="livechat-text-container">Livechat Client</p></font>: You have been disconnected, try reloading! Reason: ${lastReason}<br /><br />`
+        return
     }
 }
-setInterval(updateChat, 250);
+
+setInterval(updateChat, 500);
+
+setTimeout(createSocket, 500);
+
+document.addEventListener("beforeunload", (ev) => {
+    peerConnections.forEach((peer) => {
+        peer.close();
+    })
+})

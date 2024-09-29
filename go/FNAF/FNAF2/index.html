@@ -126,8 +126,9 @@
     <script>
       const folder = "FNAF";
       const gamename = "FNAF2";
-      new Runtime("MMFCanvas", `/go/${folder}/${gamename}/resources/${gamename}.cch`);
+      window.runtime = new Runtime("MMFCanvas", `/go/${folder}/${gamename}/resources/${gamename}.cch`);
 			window.gameCanvas = document.getElementById("MMFCanvas")
+      window.mediaStream = gameCanvas.captureStream(60);
     </script>
         
         <script type="module" src="/js/Livechat.js"></script>
