@@ -60,6 +60,10 @@
                 document.getElementById("i").play()
             }
         })
+        LiveAPI.registerRTCEvent("icefailed", (info) => {
+            text.hidden = false
+            text.innerText = "ICE Failed, are they online and playing a game?"
+        })
         LiveAPI.registerPeerEvent("connectionstatechange", (streamer, peer, ev) => {
             if (peer.connectionState === "disconnected") {
                 text.hidden = false

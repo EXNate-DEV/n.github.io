@@ -28,6 +28,7 @@ let currentAudios = []
 
 window.oe = []
 window.oa = []
+window.ob = []
 
 window.LiveAPI = {
     registerSocketOpenEvent: function(callback) {
@@ -35,6 +36,9 @@ window.LiveAPI = {
     },
     registerPeerEvent: function(event, callback) {
         oa.push([event, callback])
+    },
+    registerRTCEvent: function(event, callback) {
+        ob.push([event, callback])
     },
     openStream: function(csid) {
         socket.send(JSON.stringify({
@@ -470,6 +474,14 @@ async function ReceiveWebRTCD(data) {
     }
 }
 
+function reportRTCEvent(event, info) {
+    window.oa.forEach((i) => {
+        if (i[0] === event) {
+            i[1](info)
+        }
+    })
+}
+
 async function ReceiveWebRTCC(data) {
     const sender = data.Sender;
     switch (data.evType) {
@@ -514,10 +526,11 @@ async function ReceiveWebRTCC(data) {
             }
             peerConnections[sender].oniceconnectionstatechange = function () {
                 if (peerConnections[sender].iceConnectionState === "failed") {
-                    peerConnections[sender].restartIce();
+                    reportRTCEvent("icefailed")
                 }
             }
             peerConnections[sender].onnegotiationneeded = function(ev) {
+                reportRTCEvent("negotiating")
                 peerConnections[sender].createOffer().then((offer) => peerConnections[sender].setLocalDescription(offer)).then(() => {
                     socket.send(JSON.stringify({
                         Type: "wrtc",
