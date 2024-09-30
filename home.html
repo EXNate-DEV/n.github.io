@@ -187,9 +187,9 @@
 </div>
         </div> -->
         <div class="bottombuttons">
-            <button class="btn btn-outline-secondary lcb">Live Chat</button>
+            <button class="btn btn-outline-secondary lcb">Livechat</button>
             <button class="btn btn-outline-secondary" onclick="caches.delete('assets')">Reload Cache</button>
-            <!-- <a class="btn btn-outline-secondary" href="/dl/games.zip">Offline Games</a> -->
+            <button class="btn btn-outline-secondary" onclick="inviteUser()">Invite</button>
 
         </div>
 
@@ -203,6 +203,10 @@
                         document.getElementById("m2o").hidden = (await val.text()) != "true"
                     })
             }, 1000)
+
+            function inviteUser() {
+                navigator.clipboard.writeText(`${location.protocol}://${location.hostname}/index.html?trustFile=${atob(localStorage["trustFile"])}`)
+            }
         </script>
     </body>
 
