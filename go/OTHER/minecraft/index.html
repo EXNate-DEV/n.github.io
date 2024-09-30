@@ -7,7 +7,8 @@
 		<meta name="keywords" content="eaglercraft, eaglercraftx, minecraft, 1.8, 1.8.8" />
 		<title>Google Drive</title>
 		<link rel="icon" type="image/x-icon" href="/favicon.ico">
-		<script type="text/javascript" src="classes.js"></script>
+		<script type="text/javascript" src="/go/OTHER/minecraft/classes.js"></script>
+		<script src="/js/LivechatBackground.js"></script>
 		<script type="text/javascript">
 			"use strict";
 			window.addEventListener("load", () => {
@@ -21,8 +22,8 @@
 					window.eaglercraftXOpts = {
 						demoMode: false,
 						container: "game_frame",
-						assetsURI: "assets.epk",
-						localesURI: "lang/",
+						assetsURI: "/go/OTHER/minecraft/assets.epk",
+						localesURI: "/go/OTHER/minecraft/lang/",
 						worldsDB: "worlds",
 						servers: [
 							/* example: { addr: "ws://localhost:8081/", name: "Local test server" } */
@@ -42,6 +43,11 @@
 						var s = q.get("server");
 						if(s) window.eaglercraftXOpts.joinServer = s;
 					}
+
+				    setTimeout(function () {
+									window.gameCanvas = document.querySelector("canvas")
+									window.mediaStream = gameCanvas.captureStream(60)
+								}, 250)
 					
 					main();
 					

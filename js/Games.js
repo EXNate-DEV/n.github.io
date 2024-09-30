@@ -8,7 +8,7 @@ let Games = {
     },
     DOOM_1993: () => {
         new Prompt("<font color='#FF7777'>Game Warning</font>", "This game contains gore, are you sure you want to play this game?", true, 2).Show().then(function() {
-            location.href = "/go/CLASSIC/doom.1993"
+            location.href = "/go/CLASSIC/doom1993"
         })
     },
     WIN95: () => {

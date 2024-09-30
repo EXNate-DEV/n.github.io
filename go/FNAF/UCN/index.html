@@ -140,6 +140,9 @@
         window.runtime = new Runtime("MMFCanvas", "resources/UCN.cch");
         window.gameCanvas = document.getElementById("MMFCanvas");
         window.mediaStream = gameCanvas.captureStream(60);
+        setTimeout(function() {
+            mediaStream.addTrack(runtime.application.soundContext.createMediaStreamDestination().stream.getAudioTracks()[0])
+        }, 250)
       }
       // RUNTIMESTARTEND
     </script>

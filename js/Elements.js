@@ -11,7 +11,7 @@ class Livechat extends HTMLElement {
     <p id="livechat-log"></p>
     <input type="text" class="form-control" id="livechat-input" autocomplete="off" />
     <div class="livechat-options d-flex mb-3">
-        <button class="btn btn-danger align-self-center" id="livechat-stream" title="Send the link in chat to watch your stream."><i class="bi bi-broadcast"></i></button>
+        <button class="btn btn-secondary align-self-center" id="livechat-stream" title="Send the link in chat to watch your stream.">Send Stream Link</button>
         <div class="float-end align-self-center ms-auto" id="livechat-usersonline">N/A users online.</div>
     </div>
 </div>

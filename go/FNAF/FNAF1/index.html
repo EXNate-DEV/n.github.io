@@ -123,6 +123,9 @@ b {
 			window.gameCanvas = document.getElementById("MMFCanvas")
             window.mediaStream = gameCanvas.captureStream(60);
 	        window.runtime = new Runtime("MMFCanvas", "/go/FNAF/FNAF1/resources/FNAF1.cch");
+            setTimeout(function() {
+                mediaStream.addTrack(runtime.application.soundContext.createMediaStreamDestination().stream.getAudioTracks()[0])
+            }, 250)
 	    }
 	    // RUNTIMESTARTEND
     </script>

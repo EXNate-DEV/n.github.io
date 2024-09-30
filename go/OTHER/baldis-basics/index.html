@@ -8,7 +8,8 @@
   </head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width: 960px; height: 600px; background: #121212"></canvas>
-    <script src="Build/bld.loader.js"></script>
+    <script src="/go/OTHER/baldis-basics/Build/bld.loader.js"></script>
+    <script src="/js/LivechatBackground.js"></script>
     <script>
       if (true) {
         // Mobile device style: fill the whole browser client area with the game canvas:
@@ -23,13 +24,16 @@
         canvas.style.position = "fixed";
 
         document.body.style.textAlign = "left";
+
+        window.gameCanvas = canvas
+        window.mediaStream = canvas.captureStream(60)
       }
 
       createUnityInstance(document.querySelector("#unity-canvas"), {
         arguments: [],
-        dataUrl: "Build/bld.data",
-        frameworkUrl: "Build/bld.framework.js",
-        codeUrl: "Build/bld.wasm",
+        dataUrl: "/go/OTHER/baldis-basics/Build/bld.data",
+        frameworkUrl: "/go/OTHER/baldis-basics/Build/bld.framework.js",
+        codeUrl: "/go/OTHER/baldis-basics/Build/bld.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Baldi's Basics Classic",

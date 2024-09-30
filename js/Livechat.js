@@ -35,6 +35,24 @@ window.LiveAPI = {
     },
     registerPeerEvent: function(event, callback) {
         oa.push([event, callback])
+    },
+    openStream: function(csid) {
+        socket.send(JSON.stringify({
+            Type: "wrtc",
+            Target: csid,
+            Data: {
+                evType: "open",
+                Sender: UID(),
+                streamer: true
+            }
+        }))
+        setTimeout(function () {
+            ReceiveWebRTCC({
+                evType: "open",
+                Sender: csid,
+                streamer: false
+            })
+        }, 40)
     }
 }
 
@@ -349,7 +367,7 @@ function ReceiveAdminPacket(data) {
 
 window.peerConnections = [];
 
-async function ReceiveWebRTCC(data) {
+async function ReceiveWebRTCD(data) {
     const sender = data.Sender;
     switch (data.evType) {
         case "open": {
@@ -358,16 +376,7 @@ async function ReceiveWebRTCC(data) {
             }
             peerConnections[sender] = new RTCPeerConnection({
                 iceServers: [
-                    { urls: "stun:stun.l.google.com:19302" },
-                    { urls: "stun:stun.l.google.com:5349" },
-                    { urls: "stun:stun1.l.google.com:3478" },
-                    { urls: "stun:stun1.l.google.com:5349" },
-                    { urls: "stun:stun2.l.google.com:19302" },
-                    { urls: "stun:stun2.l.google.com:5349" },
-                    { urls: "stun:stun3.l.google.com:3478" },
-                    { urls: "stun:stun3.l.google.com:5349" },
-                    { urls: "stun:stun4.l.google.com:19302" },
-                    { urls: "stun:stun4.l.google.com:5349" }
+                    { urls: "turn:assets.mlxoa.com:3478", username: "public", credential: "exdnpolarusage" }
                 ],
                 iceTransportPolicy: "all"
             });
@@ -383,15 +392,109 @@ async function ReceiveWebRTCC(data) {
                     })
                 }
             }
+            peerConnections[sender].onicecandidate = function(ev) {
+                socket.send(JSON.stringify({
+                    Type: "xrtc",
+                    Target: sender,
+                    Data: {
+                        Sender: UID(),
+                        evType: "candidate",
+                        candidate: ev.candidate
+                    }
+                }))
+            }
+            peerConnections[sender].onconnectionstatechange = function () {
+                if (peerConnections[sender] === undefined || peerConnections[sender].connectionState === "closed" || peerConnections[sender].connectionState === "disconnected") {
+                    console.log("lost connection")
+                    delete peerConnections[sender]
+                }
+            }
+            peerConnections[sender].oniceconnectionstatechange = function () {
+                if (peerConnections[sender].iceConnectionState === "failed") {
+                    peerConnections[sender].restartIce();
+                }
+            }
+            peerConnections[sender].onnegotiationneeded = function(ev) {
+                peerConnections[sender].createOffer().then((offer) => peerConnections[sender].setLocalDescription(offer)).then(() => {
+                    socket.send(JSON.stringify({
+                        Type: "xrtc",
+                        Target: sender,
+                        Data: {
+                            Sender: UID(),
+                            evType: "offer",
+                            offer: peerConnections[sender].localDescription
+                        }
+                    }))
+                })
+            }
+            break;
+        }
+        case "offer": {
+            if (!peerConnections[sender]) {
+                console.warn(`Connection with UUID ${sender} hasn't been started.`);
+                return;
+            }
+            await peerConnections[sender].setRemoteDescription(new RTCSessionDescription(data.offer));
+            await peerConnections[sender].setLocalDescription(await peerConnections[sender].createAnswer());
             socket.send(JSON.stringify({
-                Type: "wrtc",
+                Type: "xrtc",
                 Target: sender,
                 Data: {
                     Sender: UID(),
-                    evType: "open",
-                    streamer: false
+                    evType: "answer",
+                    answer: peerConnections[sender].localDescription
                 }
             }))
+            console.log("got offer.")
+            break;
+        }
+        case "answer": {
+            await peerConnections[sender].setRemoteDescription(new RTCSessionDescription(data.answer))
+            console.log("got answer.")
+            break;
+        }
+        case "candidate": {
+            if (!peerConnections[sender]) {
+                console.warn(`Connection with UUID ${sender} hasn't been started.`);
+                return;
+            }
+            console.log("got ice candidate.")
+            await peerConnections[sender].addIceCandidate(data.candidate)
+            break;
+        }
+        case "close": {
+            peerConnections[sender].close();
+            delete peerConnections[sender]
+            break;
+        }
+    }
+}
+
+async function ReceiveWebRTCC(data) {
+    const sender = data.Sender;
+    switch (data.evType) {
+        case "open": {
+            if (peerConnections[sender]) {
+                return
+            }
+            peerConnections[sender] = new RTCPeerConnection({
+                iceServers: [
+                    { urls: "turn:assets.mlxoa.com:3478", username: "public", credential: "exdnpolarusage" }
+                ],
+                iceTransportPolicy: "all"
+            });
+            oa.forEach((d) => {
+                peerConnections[sender].addEventListener(d[0], function (ev) {
+                    d[1](data.streamer, peerConnections[sender], ev)
+                })
+            })
+            if (data.streamer) {
+                if (window.mediaStream) {
+                    mediaStream.getTracks().forEach((track) => {
+                        peerConnections[sender].addTrack(track, mediaStream)
+                    })
+                }
+            }
             peerConnections[sender].onicecandidate = function(ev) {
                 socket.send(JSON.stringify({
                     Type: "wrtc",
@@ -409,6 +512,11 @@ async function ReceiveWebRTCC(data) {
                     delete peerConnections[sender]
                 }
             }
+            peerConnections[sender].oniceconnectionstatechange = function () {
+                if (peerConnections[sender].iceConnectionState === "failed") {
+                    peerConnections[sender].restartIce();
+                }
+            }
             peerConnections[sender].onnegotiationneeded = function(ev) {
                 peerConnections[sender].createOffer().then((offer) => peerConnections[sender].setLocalDescription(offer)).then(() => {
                     socket.send(JSON.stringify({
@@ -422,7 +530,6 @@ async function ReceiveWebRTCC(data) {
                     }))
                 })
             }
-            peerConnections[sender].onnegotiationneeded(null)
             break;
         }
         case "offer": {
@@ -493,6 +600,11 @@ function parseMessage(ev) {
         case "wrtc":
             if (obj.Target === UID()) {
                 ReceiveWebRTCC(obj.Data);
+            }
+            break;
+        case "xrtc":
+            if (obj.Target === UID()) {
+                ReceiveWebRTCD(obj.Data)
             }
             break;
     }
@@ -757,7 +869,7 @@ async function updateChat() {
 
 setInterval(updateChat, 500);
 
-setTimeout(createSocket, 500);
+setTimeout(createSocket, 1000);
 
 document.body.onbeforeunload = (ev) => {
     peerConnections.forEach((peer, i) => {// Close each track
