@@ -30,6 +30,8 @@ window.oe = []
 window.oa = []
 window.ob = []
 
+let enabled = {}
+
 window.LiveAPI = {
     registerSocketOpenEvent: function(callback) {
         oe.push(callback)
@@ -57,6 +59,9 @@ window.LiveAPI = {
                 streamer: false
             })
         }, 40)
+    },
+    SetMessageEnabled: function (message, enable) {
+        enabled[message] = enable
     }
 }
 
@@ -592,6 +597,9 @@ async function ReceiveWebRTCC(data) {
  */
 function parseMessage(ev) {
     let obj = ev;
+    if (enabled[obj.Type] === false) {
+        return
+    }
     switch (obj.Type) {
         case "message":
             ReceiveMessage(obj.Data);
