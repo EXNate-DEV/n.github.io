@@ -62,18 +62,18 @@
         })
         LiveAPI.registerRTCEvent("icefailed", (info) => {
             text.hidden = false
-            text.innerText = "Relay failed, something happened mid-connection"
+            text.innerText = "ICE Failed, are they online and playing a game?"
         })
         LiveAPI.registerPeerEvent("connectionstatechange", (streamer, peer, ev) => {
             if (peer.connectionState === "disconnected") {
                 text.hidden = false
-                text.innerText = "Disconnected, please wait for reconnection (1-30s)."
+                text.innerText = "Disconnected, please reload the tab to reconnect."
             }
             if (peer.connectionState === "failed") {
                 text.hidden = false
-                text.innerText = "Connection failed, are they on the website?"
+                text.innerText = "Connection failed, are they playing a supported game?"
             }
-            if (peer.connectionState === "closed") {
+            if (peer === null || peer.connectionState === "closed") {
                 text.hidden = false
                 text.innerText = "Connection closed, they probably exited the game."
             }

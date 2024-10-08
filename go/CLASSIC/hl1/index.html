@@ -675,11 +675,11 @@
 				Module.print('Failed to initialize BrowserFS: ' + e);
 			}
 
-			FS.mount(IDBFS, {}, '/xash');
-			FS.syncfs(true, function(err) {
-				if (err) Module.print('Loading IDBFS: ' + err);
-			});
-			mounted = true;
+			mfs.mount('/ls', new BrowserFS.FileSystem.LocalStorage());
+			FS.mount(new BrowserFS.EmscriptenFS(), {
+				root: '/ls'
+			}, '/xash');
+			Module.print('LocalStorage mounted');
 
 			FS.chdir('/xash/');
 		}
