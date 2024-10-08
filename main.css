@@ -143,7 +143,7 @@ canvas {
 }
 
 #livechat-log * {
-    max-width: 50%;
+    max-width: 25%;
 }
 
 .main-a {
@@ -159,8 +159,10 @@ canvas {
 }
 
 .livechat-text-container {
-    padding: 4px;
-    border-radius: 4px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 64px;
     background-color: #484848;
 }
 

@@ -1,4 +1,3 @@
-import {io} from "socket.io-client";
 import {marked} from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 import {Emitter} from "/js/Classes.js"
 
@@ -266,10 +265,10 @@ function ReceiveMessage(MSG) {
             LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container">${message.Username}</font> started a stream</p> [<a class="livechat-text-container" href="/broadcast/?csid=${encodeURIComponent(message.Id)}">Watch</a>]<br /><br />`;
         } else {
             if (message.Id == "sys-reserved") {
-                LivechatLog.innerHTML += `<font color="#FF7711"><p class="livechat-text-container">Livechat Server</p></font>: ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
+                LivechatLog.innerHTML += `<font color="#FF7711"><p class="livechat-text-container">Livechat Server</p></font> ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
             } else {
                 PlaySoundByContent(message.Content)
-                LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container" csid="${message.Id}" mid="${message.messageId}">${message.Username}</p></font>: ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
+                LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container" csid="${message.Id}" mid="${message.messageId}">${message.Username}</p></font> ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
             }
         }
     }
@@ -293,12 +292,12 @@ function QueueMessage(MSG) {
     let message = Message.Deserialize(MSG);
     if (message.Content != null) {
         if (message.Type == 1) {
-            queue += `<font color="#CCCCCC"><p class="livechat-text-container" csid="${message.Id}">${message.Username}</font> started a stream</p> [<a class="livechat-text-container" href="/broadcast/?csid=${encodeURIComponent(message.Id)}">Watch</a>]<br /><br />`;
+            queue += `<font color="#CCCCCC"><p class="livechat-text-container" csid="${message.Id}">${message.Username}</font> started a stream</p> <a class="livechat-text-container" href="/broadcast/?csid=${encodeURIComponent(message.Id)}">Watch</a><br /><br />`;
         } else {
             if (message.Id == "sys-reserved") {
-                queue += `<font color="#FF7711"><p class="livechat-text-container" csid="${message.Id}" mid="${message.messageId}">Livechat Server</p></font>: ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
+                queue += `<font color="#FF7711"><p class="livechat-text-container" csid="${message.Id}" mid="${message.messageId}">Livechat Server</p></font> ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
             } else {
-                queue += `<font color="#CCCCCC"><p class="livechat-text-container" csid="${message.Id}" mid="${message.messageId}">${message.Username}</p></font>: ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
+                queue += `<font color="#CCCCCC"><p class="livechat-text-container" csid="${message.Id}" mid="${message.messageId}">${message.Username}</p></font> ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
             }
         }
     }
@@ -375,109 +374,6 @@ function ReceiveAdminPacket(data) {
 }
 
 window.peerConnections = [];
-
-async function ReceiveWebRTCD(data) {
-    const sender = data.Sender;
-    switch (data.evType) {
-        case "open": {
-            if (peerConnections[sender]) {
-                return
-            }
-            peerConnections[sender] = new RTCPeerConnection({
-                iceServers: [
-                    { urls: "turn:assets.mlxoa.com:3478", username: "public", credential: "exdnpolarusage" }
-                ],
-                iceTransportPolicy: "all"
-            });
-            oa.forEach((d) => {
-                peerConnections[sender].addEventListener(d[0], function (ev) {
-                    d[1](data.streamer, peerConnections[sender], ev)
-                })
-            })
-            if (data.streamer) {
-                if (window.mediaStream) {
-                    mediaStream.getTracks().forEach((track) => {
-                        peerConnections[sender].addTrack(track, mediaStream)
-                    })
-                }
-            }
-            peerConnections[sender].onicecandidate = function(ev) {
-                socket.send(JSON.stringify({
-                    Type: "xrtc",
-                    Target: sender,
-                    Data: {
-                        Sender: UID(),
-                        evType: "candidate",
-                        candidate: ev.candidate
-                    }
-                }))
-            }
-            peerConnections[sender].onconnectionstatechange = function () {
-                if (peerConnections[sender] === undefined || peerConnections[sender].connectionState === "closed" || peerConnections[sender].connectionState === "disconnected") {
-                    console.log("lost connection")
-                    delete peerConnections[sender]
-                }
-            }
-            peerConnections[sender].oniceconnectionstatechange = function () {
-                if (peerConnections[sender].iceConnectionState === "failed") {
-                    peerConnections[sender].restartIce();
-                }
-            }
-            peerConnections[sender].onnegotiationneeded = function(ev) {
-                peerConnections[sender].createOffer().then((offer) => peerConnections[sender].setLocalDescription(offer)).then(() => {
-                    socket.send(JSON.stringify({
-                        Type: "xrtc",
-                        Target: sender,
-                        Data: {
-                            Sender: UID(),
-                            evType: "offer",
-                            offer: peerConnections[sender].localDescription
-                        }
-                    }))
-                })
-            }
-            break;
-        }
-        case "offer": {
-            if (!peerConnections[sender]) {
-                console.warn(`Connection with UUID ${sender} hasn't been started.`);
-                return;
-            }
-            await peerConnections[sender].setRemoteDescription(new RTCSessionDescription(data.offer));
-            await peerConnections[sender].setLocalDescription(await peerConnections[sender].createAnswer());
-            socket.send(JSON.stringify({
-                Type: "xrtc",
-                Target: sender,
-                Data: {
-                    Sender: UID(),
-                    evType: "answer",
-                    answer: peerConnections[sender].localDescription
-                }
-            }))
-            console.log("got offer.")
-            break;
-        }
-        case "answer": {
-            await peerConnections[sender].setRemoteDescription(new RTCSessionDescription(data.answer))
-            console.log("got answer.")
-            break;
-        }
-        case "candidate": {
-            if (!peerConnections[sender]) {
-                console.warn(`Connection with UUID ${sender} hasn't been started.`);
-                return;
-            }
-            console.log("got ice candidate.")
-            await peerConnections[sender].addIceCandidate(data.candidate)
-            break;
-        }
-        case "close": {
-            peerConnections[sender].close();
-            delete peerConnections[sender]
-            break;
-        }
-    }
-}
 
 function reportRTCEvent(event, info) {
     window.oa.forEach((i) => {
@@ -817,7 +713,7 @@ LivechatInput.addEventListener("keypress", function (ev) {
                 }, 1000);
             } else {
                 if (!sentPleaseWait) {
-                    LivechatLog.innerHTML += `<font color="#FF7711"><p class="livechat-text-container">Livechat Client</p></font>: Please wait 1s before sending another message.<br />`;
+                    LivechatLog.innerHTML += `<font color="#FF7711"><p class="livechat-text-container">Livechat Client</p></font> Please wait 1s before sending another message.<br />`;
                     LivechatLog.scrollTo({
                         top: LivechatLog.scrollHeight,
                         behavior: "instant",
@@ -883,7 +779,7 @@ async function updateChat() {
         createSocket()
     }
     if (socket.readyState == socket.CLOSED) {
-        LivechatLog.innerHTML = `<font color="#FF7711"><p class="livechat-text-container">Livechat Client</p></font>: You have been disconnected, try reloading! Reason: ${lastReason}<br /><br />`
+        LivechatLog.innerHTML = `<font color="#FF7711"><p class="livechat-text-container">Livechat Client</p></font> You have been disconnected, try reloading! Reason: ${lastReason}<br /><br />`
         return
     }
 }
@@ -892,17 +788,12 @@ setInterval(updateChat, 500);
 
 setTimeout(createSocket, 1000);
 
-document.body.onbeforeunload = (ev) => {
-    peerConnections.forEach((peer, i) => {// Close each track
-        peer.getTracks().forEach(track => {
-            track.stop();
-        });
-        peer.ontrack = null;
-        peer.onicecandidate = null;
-        peer.oniceconnectionstatechange = null;
-        peer.onsignalingstatechange = null;
-        peer.close();
-    })
-
-    peerConnections = []
-}
+window.onbeforeunload = function() {
+    peerConnections.forEach((peer, index) => {
+        const peerData = {
+            sender: index,
+            // ... other necessary details
+        };
+        localStorage.setItem(`peer-${index}`, JSON.stringify(peerData));
+    });
+};

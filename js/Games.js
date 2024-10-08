@@ -19,6 +19,9 @@ let Games = {
     WIN95: () => {
         new Prompt("<font color='#FF7777'>Notice</font>", "This software doesn't run properly.", false, 3).Show()
     },
+    HL1: () => {
+        location.href = "/go/CLASSIC/hl1"
+    },
     Minecraft: () => {
         location.href = "/go/OTHER/minecraft"
     }
