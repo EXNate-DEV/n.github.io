@@ -26,6 +26,8 @@
             }
         </script>
     <script src="/js/DOMPurify.js"></script>
+    <script src="/go/OTHER/ai-chat/sio.js" type="module"></script>
+    <script src="/go/OTHER/ai-chat/icc.js" type="module"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -83,6 +85,41 @@
             position: fixed;
             transform: translate(-50%, -50%);
         }
+
+        #gamearea {
+            width: 90%;
+            height: 45%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            overflow: scroll;
+            overflow-x: hidden;
+            background-color: #242424;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        #gamearea::-webkit-scrollbar {
+            visibility: hidden;
+        }
+
+        #chatinput {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            width: 90%;
+            transform: translate(-50%, -50%);
+        }
+
+        #gamearea p {
+            display: inline;
+        }
+        #systemprompt {
+            top: 5%;
+            left: 5%;
+            width: 100%;
+            height: 20%;
+        }
     </style>
 
     <title>Google Drive</title>
@@ -110,7 +147,9 @@
     <div id="wrapper">
         <div id="border">
             <div id="canvas">
-                <textarea id="gamearea" readonly></textarea>
+                <textarea id="systemprompt" placeholder="AI Instructions go here, this is also referred to as the system prompt."></textarea>
+                <p id="gamearea" readonly></p>
+                <input id="chatinput" type="text" placeholder="your message (enter/return to send)">
             </div>
         </div>
     </div>
@@ -120,10 +159,78 @@
         <button class="btn btn-outline-secondary" onclick="location.pathname = '/'">
             Return Home
         </button>
+        <button class="btn btn-outline-secondary" id="savechat">
+            Reset Chat
+        </button>
+        <button class="btn btn-outline-secondary" id="deletechat">
+            Delete Chat
+        </button>
     </div>
 
     <script type="module" src="/js/Livechat.js"></script>
-    <script>
+    <script type="module">
+        import {marked} from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+        const ci = document.getElementById("chatinput")
+        const gt = document.getElementById("gamearea")
+        const sc = document.getElementById("savechat")
+        const dc = document.getElementById("deletechat")
+        const aii = document.getElementById("systemprompt")
+        const obj = JSON.parse(localStorage.getItem("aichat-saved"))
+        let history = [
+            {role: "system", content: aii.value}
+        ]
+        if (obj) {
+            gt.innerHTML = obj.chatHTML
+            aii.value = obj.sysprompt
+            history = obj.history
+        }
+        sc.onclick = function(ev) {
+            history = [
+                {role: "system", content: aii.value}
+            ]
+            gt.innerHTML = ""
+        }
+        dc.onclick = function(ev) {
+            localStorage.removeItem("aichat-saved")
+            location.reload()
+        }
+        aii.onchange = function() {
+            history[0].content = aii.value
+            localStorage.setItem("aichat-saved", JSON.stringify({
+                chatHTML: gt.innerHTML,
+                history: history,
+                sysprompt: aii.value
+            }))
+        }
+        ci.onkeydown = function (ev) {
+            if (ev.key.toLowerCase() == "enter") {
+                history[0].content = aii.value
+                history.push({role:"user",content:ci.value})
+                let it = gt.innerHTML
+                gt.innerHTML = `<font color="#CCCCCC"><p class="livechat-text-container">You</p></font> ${DOMPurify.sanitize(marked.parse(ci.value))}<br /><br />${it}`
+                it = gt.innerHTML
+                AIClient.respond(history, function(t, d) {
+                    if (t == "chunk") {
+                        gt.innerHTML = `<font color="#FF7711"><p class="livechat-text-container">AI</p></font> ${DOMPurify.sanitize(marked.parse(d))}<br /><br />${it}`
+                    }
+                    if (t == "done") {
+                        ci.disabled = false
+                        aii.disabled = false
+                        history.push({role:"assistant",content:d})
+                        gt.innerHTML = `<font color="#FF7711"><p class="livechat-text-container">AI</p></font> ${DOMPurify.sanitize(marked.parse(d))}<br /><br />${it}`
+                        it = gt.innerHTML
+                        localStorage.setItem("aichat-saved", JSON.stringify({
+                            chatHTML: gt.innerHTML,
+                            history: history,
+                            sysprompt: aii.value
+                        }))
+                    }
+                })
+                ci.value = ""
+                ci.disabled = true
+                aii.disabled = true
+            }
+        }
     </script>
 </body>
 
