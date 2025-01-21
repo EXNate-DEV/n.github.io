@@ -1,12 +1,17 @@
 {
   "scripts": {
-    "dev": "node Server.js",
+    "dev": "node Server.mjs",
     "obfuscate-index": "javascript-obfuscator ./js/0bf.js --output ./js/obf3.js --string-array true --split-strings true --dead-code-injection true --dead-code-injection-threshold 10000 --target browser --unicode-escape-sequence true --numbers-to-expressions true --self-defending true",
     "obfuscate-livechat": "javascript-obfuscator ./js/LivechatV3.js --output ./js/Livechat.js --string-array true --split-strings true --dead-code-injection true --dead-code-injection-threshold 10000 --target browser"
   },
   "dependencies": {
+    "encodeurl": "^2.0.0",
+    "escape-html": "^1.0.3",
     "express": "^4.21.0",
-    "glob": "^10.3.10"
+    "glob": "^10.3.10",
+    "mime": "^4.0.6",
+    "parseurl": "^1.3.3",
+    "send": "^1.1.0"
   },
   "devDependencies": {
     "javascript-obfuscator": "^4.1.1"

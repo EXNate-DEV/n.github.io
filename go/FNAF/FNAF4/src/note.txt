@@ -1,0 +1,11 @@
+attempting to figure out variables in the obfuscated code:
+
+annoying as fuck (as intended)
+
+FNAF4Runtime.Pc.G.di == rhTimer
+FNAF4Runtime.Pc.G.Gz == rhTimerDelta
+FNAF4Runtime.Pc.G.Wk == rhTimerOld
+FNAF4Runtime.Pc.dd == timer
+FNAF4Runtime.Pc.Uh.step == stepApplication
+FNAF4Runtime.Pc.oc == soundPlayer
+FNAF4Runtime.Pc.G.Lw = rhQuit

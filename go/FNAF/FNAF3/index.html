@@ -1,141 +1,65 @@
-<!DOCTYPE html>
+<div class="page-script" data-type="">/go/FNAF/FNAF3/src/runtime.js</div>
+<div class="page-script" data-type="">/go/FNAF/FNAF3/rtup.js</div>
 
-<html lang="en">
-  <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-N4CKXS2CMF"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
+<style type="text/css">
+  h1 {
+    color: white;
+  }
+  #bloctxt {
+    border-left-width: 5px;
+    border-left-style: solid;
+    border-left-color: #962300;
+    padding-left: 10px;
+    position: absolute;
+    top:5%;
+    left: 50%;
+    width: 600px;
+    margin-left: -260px
+  }
+  b {
+    color: #CCCCCC
+  }
+  #wrapper {
+    padding: 10px;
+    margin: 0 auto;
+  }
+  #border {
+    background-color: transparent;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    margin: 0 auto;
+    padding: 5px;
+    width:1024px;
+    height:768px;
 
-      gtag("config", "G-N4CKXS2CMF");
-    </script>
-    <script src="/js/Elements.js"></script>
-    <script src="/js/Page.js"></script>
-    <title>Google Drive</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <script type="importmap">
-      {
-        "imports": {
-          "socket.io-client": "https://cdn.socket.io/4.7.4/socket.io.esm.min.js"
-        }
-      }
-    </script>
-    <script src="/js/DOMPurify.js"></script>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link href="/main.css" rel="stylesheet" />
+  }
 
-    <style type="text/css">
-      h1 {
-        color: white;
-      }
-      #bloctxt {
-        border-left-width: 5px;
-        border-left-style: solid;
-        border-left-color: #962300;
-        padding-left: 10px;
-        position: absolute;
-        top: 5%;
-        left: 50%;
-        width: 600px;
-        margin-left: -260px;
-      }
-      b {
-        color: #cccccc;
-      }
-      #wrapper {
-        padding: 10px;
-        margin: 0 auto;
-      }
-      #border {
-        background-color: transparent;
-        -webkit-border-radius: 7px;
-        -moz-border-radius: 7px;
-        border-radius: 7px;
-        margin: 0 auto;
-        padding: 5px;
-        width: 1024px;
-        height: 768px;
-      }
+  #canvas {
+    width:1024px;
+    height:768px;
+  }
 
-      #canvas {
-        width: 1024px;
-        height: 768px;
-      }
+  #MMFCanvas {
+    border-radius: 5px;
+  }
+</style>
 
-      #MMFCanvas {
-        border-radius: 5px;
-      }
-    </style>
-
-    <title>GameRunner</title>
-
-    <script src="/go/FNAF/FNAF3/src/Runtime.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-
-  <!-- This is where we create the Canvas element that will contain the application...-->
-  <body data-bs-theme="dark">
-    <div id="wrapper">
-      <div id="border">
-        <div id="canvas">
-          <canvas id="MMFCanvas" width="1024" height="768">
-            <p>Your browser does not support Canvas.</p>
-          </canvas>
-        </div>
+<div id="page-keep" data-location=before>
+  <div id="wrapper">
+    <div id="border">
+      <div id="canvas">
+        <canvas id="MMFCanvas-FNAF3" width="1024" height="768">
+          <p>Your browser does not support Canvas.</p>
+        </canvas>
       </div>
     </div>
+  </div>
+</div>
+<h1 align="center">Five Nights At Freddy's 3</h1>
+<h5 align="center">This is the <b>third</b> game of the FNAF series.</h5>
 
-    <h1 align="center" id="GameTitle">Five Nights At Freddy's 3</h1>
-    <h5 align="center" id="GameDescription">
-      The third game in the FNAF series.
-      <font color="#FF7777">(Please report any bugs with NEW GAME)</font>
-    </h5>
-
-    <div class="bottombuttons">
-      <button class="btn btn-outline-secondary lcb">Live Chat</button>
-      <button
-        class="btn btn-outline-secondary"
-        onclick="location.pathname = '/'"
-      >
-        Return Home
-      </button>
-      <button
-        class="btn btn-outline-secondary"
-        onclick="document.getElementById('MMFCanvas').requestFullscreen()"
-      >
-        Fullscreen
-      </button>
-    </div>
-
-    <script>
-      const folder = "FNAF";
-      const gamename = "FNAF3";
-      window.runtime = new Runtime("MMFCanvas", `/go/${folder}/${gamename}/resources/${gamename}.cch`);
-			window.gameCanvas = document.getElementById("MMFCanvas")
-      window.mediaStream = gameCanvas.captureStream(60);
-      setTimeout(function() {
-          mediaStream.addTrack(runtime.application.soundContext.createMediaStreamDestination().stream.getAudioTracks()[0])
-      }, 250)
-    </script>
-        
-        <script type="module" src="/js/Livechat.js"></script>
-  </body>
-</html>
+<div id="page-buttons">
+  <button class="btn btn-outline-secondary" onclick="document.getElementById('MMFCanvas-FNAF3').requestFullscreen({navigationUI: 'hide'})">Fullscreen</button>
+  <button class="btn btn-outline-secondary" onclick="restartGame()">Restart Game</button>
+</div>

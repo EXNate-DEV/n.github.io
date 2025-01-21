@@ -1,65 +1,60 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-MY0THGFRYS"></script>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3054952862534774" crossorigin="anonymous"></script>
-        <link rel="icon" href="../stennerela.jpg">
-        <meta charset="utf-8">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Google Drive</title>
-        <link rel="icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="style/style.css">
-        <script src="/go/OTHER/slope/UnityProgress.js"></script>
-        <script src="/go/OTHER/slope/UnityLoader.js"></script>
+<div class="page-script" data-type="">/go/OTHER/slope/UnityProgress.js</div>
+<div class="page-script" data-type="">/go/OTHER/slope/UnityLoader.js</div>
+<div class="page-script" data-type="">/go/OTHER/slope/rtup.js</div>
 
-        <style>
-            body {
-                overflow: hidden;
-                background-color: #121212;
-            }
-        </style>
-        <!-- -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <!-- -->
-        <script>
-            var gameInstance = UnityLoader.instantiate("gameContainer", "/go/OTHER/slope/slope_new.json", {onProgress: UnityProgress,  Module:  {onRuntimeInitialized: function  () {UnityProgress(gameInstance, "complete")}}});
-        </script>
-    </head>
-    <body>
-        <div class="webgl-content" style="  width: 100%; height: 100%; top: 0; left: 0; position: absolute;">
-            <div id="gameContainer" style="  width: 100%; height: 100%; margin: auto;"></div>
+<style type="text/css">
+    h1 {
+        color: white;
+    }
+    #bloctxt {
+        border-left-width: 5px;
+        border-left-style: solid;
+        border-left-color: #962300;
+        padding-left: 10px;
+        position: absolute;
+        top:5%;
+        left: 50%;
+        width: 600px;
+        margin-left: -260px
+    }
+    b {
+        color: #CCCCCC
+    }
+    #wrapper {
+        padding: 10px;
+        margin: 0 auto;
+    }
+    #border {
+        background-color: transparent;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        border-radius: 7px;
+        margin: 0 auto;
+        padding: 5px;
+        width:1280px;
+        height:720px;
 
-            <div class="footer">
-                <div class="webgl-logo"></div>
-                <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+    }
+
+    #canvas {
+        width:1280px;
+        height:720px;
+    }
+
+    #MMFCanvas {
+        border-radius: 5px;
+    }
+</style>
+
+<div>
+    <div id="wrapper">
+        <div id="border">
+            <div id="canvas">
             </div>
         </div>
-		<script src="/js/LivechatBackground.js"></script>
-        <script>
-            if (typeof getAdinDomain !== 'undefined') {
-                const bodyTag = document.getElementsByTagName('body')[0];
+    </div>
+</div>
 
-                let addAdinPreroll = document.createElement('script');
-                addAdinPreroll.src = getAdinDomain;
-                bodyTag.appendChild(addAdinPreroll);
-                setTimeout(function () {
-                    window.gameCanvas = document.querySelector("canvas")
-                    window.mediaStream = gameCanvas.captureStream(60)
-                }, 250)
-            }
-            document.addEventListener("keydown", function  (ev) {
-                if (ev.ctrlKey && ev.key == "f") {
-                    ev.preventDefault();
-                    ev.stopImmediatePropagation();
-
-                    gameInstance.SetFullscreen(1);
-                }
-            })
-        </script>
-        <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
-        </style>
-        <h3 class="polarProvided" style="  font-weight: 500; font-family: 'Inter', sans-serif; font-optical-sizing: auto; font-style: normal; font-variation-settings: 'slnt' 0; position: fixed; bottom: 24px; left: 24px; color: white; box-sizing: border-box; padding: 8px; margin: 0; background-color: #363636; border-radius: 8px; text-align: center;">Provided by <font color="7777FF"><b>Polar</b></font><br><a style="  color: #FF7777;" href="/"><font size="2">Go Home</font></a> - <a href="javascript:gameInstance.SetFullscreen(1);" style="  color: #FF7777"><font size="2">Fullscreen</font></a></h3>
-    </body>
-</html>
+<div id="page-buttons">
+    <button class="btn btn-outline-secondary" onclick="document.getElementById('canvas').requestFullscreen({navigationUI: 'hide'})">Fullscreen</button>
+</div>

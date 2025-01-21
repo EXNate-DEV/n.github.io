@@ -4,40 +4,489 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b3f491-2e00-4188-b570-4012e9844e9b" name="Changes" comment="" />
+    <list default="true" id="d5b3f491-2e00-4188-b570-4012e9844e9b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/CLASSIC/doom1993/rtup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/CLASSIC/doom2/rtup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/CLASSIC/hl1/rtup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/CLASSIC/pacman/rtup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/FNAF/FNAF1/rtup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/FNAF/FNAF2/rtup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/FNAF/FNAF3/rtup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/rtup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/src/Runtime-last.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/src/note.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/FNAF/UCN/rtup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/OTHER/baldis-basics/rtup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/OTHER/bitlife/loader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/OTHER/minecraft/rtup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/OTHER/rope-police/rtup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/OTHER/slope/rtup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/OTHER/stickman-hook/stylecopy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go/screenshare.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Pages.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Security/PolarSecurity.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Security/PolarSecurity.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Security/PolarSecurity_bg.wasm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Security/PolarSecurity_bg.wasm.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/serveStatic.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.firebaserc" beforeDir="false" afterPath="$PROJECT_DIR$/.firebaserc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firebase.json" beforeDir="false" afterPath="$PROJECT_DIR$/firebase.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/CLASSIC/doom1993/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/CLASSIC/doom1993/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/CLASSIC/doom2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/CLASSIC/doom2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/CLASSIC/hl1/browserfs.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/browserfs.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/CLASSIC/hl1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/CLASSIC/hl1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/CLASSIC/hl1/xash.html.mem" beforeDir="false" afterPath="$PROJECT_DIR$/xash.html.mem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/CLASSIC/pacman/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/CLASSIC/pacman/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/CLASSIC/supermariobros/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/CLASSIC/supermariobros/smb.nes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF1/1v1night.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF3/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF3/src/Runtime.js" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF3/src/Runtime.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0000.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0000.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0001.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0001.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0001.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0001.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0002.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0002.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0002.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0002.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0003.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0003.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0003.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0003.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0004.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0004.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0004.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0004.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0005.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0005.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0005.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0005.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0006.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0006.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0006.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0006.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0007.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0007.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0007.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0007.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0008.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0008.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0008.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0008.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0009.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0009.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0009.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0009.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0010.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0010.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0010.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0010.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0011.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0011.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0011.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0011.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0012.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0012.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0012.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0012.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0013.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0013.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0013.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0013.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0014.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0014.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0014.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0014.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0015.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0015.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0015.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0015.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0016.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0016.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0016.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0016.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0017.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0017.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0017.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0017.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0018.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0018.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0018.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0018.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0019.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0019.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0019.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0019.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0020.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0020.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0020.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0020.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0021.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0021.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0021.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0021.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0022.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0022.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0022.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0022.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0023.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0023.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0023.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0023.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0024.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0024.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0024.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0024.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0025.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0025.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0025.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0025.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0026.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0026.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0026.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0026.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0027.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0027.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0027.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0027.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0028.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0028.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0028.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0028.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0029.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0029.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0029.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0029.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0030.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0030.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0030.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0030.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0031.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0031.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0031.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0031.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0032.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0032.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0032.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0032.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0033.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0033.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0033.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0033.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0034.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0034.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0034.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0034.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0035.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0035.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0035.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0035.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0036.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0036.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0036.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0036.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0037.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0037.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0037.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0037.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0038.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0038.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0038.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0038.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0039.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0039.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0039.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0039.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0040.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0040.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0040.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0040.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0041.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0041.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0041.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0041.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0042.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0042.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0042.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0042.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0043.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0043.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0043.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0043.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0044.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0044.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0044.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0044.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0045.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0045.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0045.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0045.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0046.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0046.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0046.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0046.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0047.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0047.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0047.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0047.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0048.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0048.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0048.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0048.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0049.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0049.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0049.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0049.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0050.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0050.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0050.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0050.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0051.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0051.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0051.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0051.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0052.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0052.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0052.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0052.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0053.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0053.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0053.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0053.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0054.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0054.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0054.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0054.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0055.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0055.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0055.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0055.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0056.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0056.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0056.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0056.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0057.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0057.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0057.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0057.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0058.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0058.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0058.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0058.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0059.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0059.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0059.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0059.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0060.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0060.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0060.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0060.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0061.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0061.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0061.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0061.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0062.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0062.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0062.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0062.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0063.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0063.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0063.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0063.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0064.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0064.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0064.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0064.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0065.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0065.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0065.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0065.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0066.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0066.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0066.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0066.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0067.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0067.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0067.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0067.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0068.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0068.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0068.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0068.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0069.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0069.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0070.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0070.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0070.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0070.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0071.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/0071.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1161.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1162.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1176.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1185.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1187.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1188.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1189.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1190.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1191.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1193.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1194.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1195.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1196.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1197.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1198.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1199.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1200.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1201.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1202.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1203.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1225.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1227.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1228.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1229.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1230.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1231.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1232.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1233.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1234.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1235.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1236.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1237.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1238.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1239.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1240.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1241.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1242.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1243.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1244.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1245.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1246.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1247.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1248.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1249.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1250.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1251.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1252.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1255.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1256.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1257.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1258.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1259.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1260.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1261.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1262.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1263.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1264.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1265.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1266.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1279.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1280.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1281.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1282.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1283.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1284.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1285.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1286.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1287.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1288.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1289.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/1290.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/FNAF4.cc1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/FNAF4.cch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0001.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0002.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0003.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0004.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0004.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0005.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0005.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0006.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0006.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0007.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0007.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0008.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0008.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0009.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0009.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0010.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0010.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0011.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0011.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0012.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0012.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0013.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0013.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0014.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0014.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0015.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0015.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0016.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0016.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0017.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0017.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0018.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0018.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0019.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0019.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0020.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/resources/M0020.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/FNAF4/src/Runtime.js" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/FNAF4/src/Runtime.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/FNAF/UCN/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/FNAF/UCN/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/baldis-basics/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/baldis-basics/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/bitlife/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/bitlife/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/assets.epk" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/assets.epk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/classes.js" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/classes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/classes.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/classes.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/favicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/favicon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/af_ZA.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/af_ZA.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/ar_SA.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/ar_SA.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/ast_ES.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/ast_ES.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/az_AZ.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/az_AZ.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/bg_BG.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/bg_BG.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/ca_ES.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/ca_ES.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/cs_CZ.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/cs_CZ.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/cy_GB.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/cy_GB.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/da_DK.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/da_DK.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/de_DE.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/de_DE.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/el_GR.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/el_GR.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/en_AU.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/en_AU.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/en_CA.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/en_CA.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/en_GB.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/en_GB.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/en_PT.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/en_PT.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/eo_UY.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/eo_UY.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/es_AR.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/es_AR.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/es_ES.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/es_ES.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/es_MX.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/es_MX.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/es_UY.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/es_UY.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/es_VE.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/es_VE.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/et_EE.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/et_EE.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/eu_ES.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/eu_ES.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/fa_IR.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/fa_IR.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/fi_FI.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/fi_FI.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/fil_PH.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/fil_PH.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/fr_CA.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/fr_CA.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/fr_FR.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/fr_FR.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/ga_IE.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/ga_IE.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/gl_ES.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/gl_ES.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/gv_IM.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/gv_IM.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/he_IL.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/he_IL.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/hi_IN.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/hi_IN.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/hr_HR.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/hr_HR.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/hu_HU.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/hu_HU.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/hy_AM.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/hy_AM.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/id_ID.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/id_ID.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/is_IS.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/is_IS.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/it_IT.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/it_IT.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/ja_JP.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/ja_JP.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/ka_GE.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/ka_GE.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/ko_KR.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/ko_KR.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/kw_GB.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/kw_GB.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/la_LA.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/la_LA.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/lb_LU.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/lb_LU.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/lt_LT.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/lt_LT.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/lv_LV.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/lv_LV.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/mi_NZ.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/mi_NZ.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/ms_MY.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/ms_MY.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/mt_MT.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/mt_MT.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/nds_DE.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/nds_DE.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/nl_NL.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/nl_NL.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/nn_NO.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/nn_NO.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/no_NO.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/no_NO.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/oc_FR.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/oc_FR.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/pl_PL.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/pl_PL.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/pt_BR.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/pt_BR.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/pt_PT.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/pt_PT.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/qya_AA.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/qya_AA.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/ro_RO.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/ro_RO.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/ru_RU.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/ru_RU.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/se_NO.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/se_NO.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/sk_SK.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/sk_SK.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/sl_SI.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/sl_SI.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/sr_SP.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/sr_SP.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/sv_SE.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/sv_SE.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/th_TH.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/th_TH.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/tlh_AA.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/tlh_AA.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/tr_TR.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/tr_TR.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/uk_UA.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/uk_UA.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/val_ES.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/val_ES.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/vi_VN.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/vi_VN.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/zh_CN.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/zh_CN.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/minecraft/lang/zh_TW.lang" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/minecraft-old/lang/zh_TW.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/rope-police/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/rope-police/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/slope/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/slope/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/stickman-hook/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/stickman-hook/bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/OTHER/stickman-hook/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/OTHER/stickman-hook/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go/screenshare.html" beforeDir="false" afterPath="$PROJECT_DIR$/go/screenshare.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Elements.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Elements.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Games.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Games.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Livechat.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Livechat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/UtilityLib.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/UtilityLib.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/service-worker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;The-Developer-Nate&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/EXNate-DEV/n.github.io&quot;,
+    &quot;accountId&quot;: &quot;a5d650e3-416d-451b-9e8b-d21f7c852f0d&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2mo5nDa3IXFamNNlFXFOR4ZEWsc" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/natha/fleet/n.github.io",
+    "last_opened_file_path": "/Users/nathanlee/WebstormProjects/exdn/go/CLASSIC/doom2",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\natha\\AppData\\Local\\Programs\\Aqua\\plugins\\javascript-base\\jsLanguageServicesImpl\\external"
+    "npm.dev.executor": "Debug",
+    "ts.external.directory.path": "/Users/nathanlee/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\natha\fleet\n.github.io" />
-      <recent name="C:\Users\natha\fleet\n.github.io\e2e" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/go/CLASSIC/doom2" />
+      <recent name="$PROJECT_DIR$/go/FNAF/UCN" />
+      <recent name="$PROJECT_DIR$/go/FNAF/FNAF4" />
+      <recent name="$PROJECT_DIR$/go/FNAF/FNAF3" />
+      <recent name="$PROJECT_DIR$/go/FNAF/FNAF2" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/js" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/go/FNAF/FNAF1" />
+      <recent name="$PROJECT_DIR$/go/FNAF" />
+      <recent name="C:\Users\natha\fleet\n.github.io" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-WS-243.22562.222" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -47,10 +496,28 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1727730252607</updated>
+      <workItem from="1731886247363" duration="117000" />
+      <workItem from="1731886367663" duration="3317000" />
+      <workItem from="1732198657786" duration="206000" />
+      <workItem from="1736900489082" duration="878000" />
+      <workItem from="1736901370841" duration="3000" />
+      <workItem from="1736901388637" duration="7550000" />
+      <workItem from="1737070415967" duration="84057000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

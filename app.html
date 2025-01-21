@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-N4CKXS2CMF"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+
+            gtag("config", "G-N4CKXS2CMF");
+        </script>
+        <script src="/js/Elements.js"></script>
+        <script src="/js/Page.js"></script>
+        <!--<script src="/js/browserfs.min.js"></script>-->
+        <title>Google Drive</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="manifest" href="/manifest.json"/>
+        <meta http-equiv="origin-trial" content="Aom4okubYdIZvgXb4+ouKI+3w/KSRd2AErJDr/LHJS4Yb72Uw4SrtKq29gBAxxZQWwxls+wa28zrabUQFL2YRwcAAABneyJvcmlnaW4iOiJodHRwczovL2V4ZG4tMy53ZWIuYXBwOjQ0MyIsImZlYXR1cmUiOiJXZWJBc3NlbWJseUpTUHJvbWlzZUludGVncmF0aW9uIiwiZXhwaXJ5IjoxNzQ0Njc1MjAwfQ==">
+        <meta http-equiv="origin-trial" content="AuVcG/nb6JDBUZDnyMR5/reaxJJTzjW8BWXEjxtXui0kusXpn6fKTEnuAeoVo5YPxdpwCxS9PQhA/b1Np79CEwoAAABieyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJmZWF0dXJlIjoiV2ViQXNzZW1ibHlKU1Byb21pc2VJbnRlZ3JhdGlvbiIsImV4cGlyeSI6MTc0NDY3NTIwMH0=">
+        <script type="importmap">
+                {
+                    "imports": {
+                        "socket.io-client": "https://cdn.socket.io/4.7.4/socket.io.esm.min.js"
+                    }
+                }
+            </script>
+        <script src="/js/DOMPurify.js"></script>
+        <script type="module" src="/js/Games.js?v=1"></script>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+        <link href="/main.css" rel="stylesheet"/>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+                crossorigin="anonymous"></script>
+    </head>
+
+    <body data-bs-theme="dark">
+        <div class="titleBar">
+            <h3 class="title">
+                Polar <span id="title-sub">[PUBLIC RELEASE 0.6]</span>
+            </h3>
+            <span id="live-activity"></span>
+        </div>
+
+        <div id="app">
+
+        </div>
+
+        <!-- Livechat -->
+        <!-- <div class="lcc">
+<p id="chatlog"></p>
+<input type="text" id="lcin" autocomplete="off" />
+<div class="lcc2">
+<button class="btn btn-danger" id="clearchat"><i class="bi bi-trash"></i></button>
+</div>
+        </div> -->
+        <div class="bottombuttons">
+            <button class="btn btn-outline-secondary lcb">Livechat</button>
+            <button id="homebutton" class="btn btn-outline-secondary" onclick="PagesAPI.changePage('/home.html')">Home</button>
+            <span id="app-buttons"></span>
+        </div>
+
+        <script type="module" src="/js/Livechat.js"></script>
+        <script type="module" src="/js/Pages.js"></script>
+
+        <script>
+            HTMLCanvasElement.prototype.getContext = function(origFn) {
+                return function(type, attributes) {
+                    if (type === 'webgl') {
+                        attributes = Object.assign({}, attributes, {
+                            preserveDrawingBuffer: true,
+                        });
+                    }
+                    return origFn.call(this, type, attributes);
+                };
+            }(HTMLCanvasElement.prototype.getContext);
+        </script>
+    </body>
+
+</html>

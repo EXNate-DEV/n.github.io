@@ -26543,12 +26543,15 @@ window['Runtime'] = (function Runtime(__can, __path){
 	{
 		doLoad: function ()
 		{
-			if (this.handle == undefined) {
-				this.handle = mosaicsLoaded + 1;
-			}
 			var name = this.app.resources + "M" + CServices.formatDiscName(this.handle, "png");
-			var image = new Image();
-			this.imageBank.mosaics[this.handle] = image;
+            var image = new Image();
+            if (this.handle === undefined) {
+                this.handle = mosaicsLoaded;
+                name = this.app.resources + "M" + CServices.formatDiscName(mosaicsLoaded, "png");
+                this.imageBank.mosaics[mosaicsLoaded] = image;
+            } else {
+                this.imageBank.mosaics[this.handle] = image;
+            }
 			var that = this;
 			image.onload = function ()
 			{

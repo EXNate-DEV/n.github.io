@@ -1,20 +1,24 @@
 {
-  "hosting": {
-    "public": ".",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "headers": [
-      {
-        "source": "**/*.*",
-        "headers": [ {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        } ]
-      }
-    ]
-  },
+  "hosting": [
+    {
+      "target": "latest",
+      "public": ".",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**",
+        ".git/**"
+      ],
+      "headers": [
+        {
+          "source": "**/*.*",
+          "headers": [ {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          } ]
+        }
+      ]
+    }
+  ],
   "yournotthemaincharacterbro": {}
 }

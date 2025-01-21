@@ -38,3 +38,64 @@
     </script>
 </body>
 </html>
+
+<div class="page-script" data-type="">/go/OTHER/slope/UnityProgress.js</div>
+<div class="page-script" data-type="">/go/OTHER/rope-police/UnityLoader.js</div>
+<div class="page-script" data-type="">/go/OTHER/rope-police/rtup.js</div>
+
+<style type="text/css">
+    h1 {
+        color: white;
+    }
+    #bloctxt {
+        border-left-width: 5px;
+        border-left-style: solid;
+        border-left-color: #962300;
+        padding-left: 10px;
+        position: absolute;
+        top:5%;
+        left: 50%;
+        width: 600px;
+        margin-left: -260px
+    }
+    b {
+        color: #CCCCCC
+    }
+    #wrapper {
+        padding: 10px;
+        margin: 0 auto;
+    }
+    #border {
+        background-color: transparent;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        border-radius: 7px;
+        margin: 0 auto;
+        padding: 5px;
+        width:1280px;
+        height:720px;
+
+    }
+
+    #canvas {
+        width:1280px;
+        height:720px;
+    }
+
+    #MMFCanvas {
+        border-radius: 5px;
+    }
+</style>
+
+<div>
+    <div id="wrapper">
+        <div id="border">
+            <div id="canvas">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page-buttons">
+    <button class="btn btn-outline-secondary" onclick="document.getElementById('canvas').requestFullscreen({navigationUI: 'hide'})">Fullscreen</button>
+</div>

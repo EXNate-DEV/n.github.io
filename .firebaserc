@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "exdn-18b11"
-  }
+  },
+  "targets": {
+    "exdn-18b11": {
+      "hosting": {
+        "latest": [
+          "exdn-3"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

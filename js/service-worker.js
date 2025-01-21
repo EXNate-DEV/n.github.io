@@ -5,7 +5,7 @@ self.addEventListener('install', (event) => {
                 return cache.addAll([
                     '/',
                     '/index.html',
-                    '/home.html'
+                    '/app.html'
                 ]);
             })
     );
@@ -20,7 +20,7 @@ async function cacheFirst(request) {
       const networkResponse = await fetch(request);
       if (networkResponse.ok) {
         const cache = await caches.open("assets");
-        cache.put(request, networkResponse.clone());
+        await cache.put(request, networkResponse.clone());
       }
       return networkResponse;
     } catch (error) {

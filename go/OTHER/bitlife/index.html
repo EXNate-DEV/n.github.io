@@ -1,328 +1,281 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<div class="page-script" data-type="">/go/OTHER/bitlife/TemplateData/UnityProgress.js</div>
+<div class="page-script" data-type="">/go/OTHER/bitlife/Build/UnityLoader.js</div>
+<div class="page-script" data-type="">/go/OTHER/bitlife/loader.js</div>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Google Drive</title>
-  <link rel="icon" href="/favicon.ico">
+<style>
 
-  <script src="/js/main.js"></script>
+  .webgl-content {
+    background: #333
+  }
 
-  <!-- WEBGL GAME IN FULLSCREEN - COPY AND PASTE THIS CSS -->
-  <style>
+  #errorBrowserBlock,
+  #loadingBlock,
+  .webgl-content {
+    padding: 0;
+    height: 80vh;
+    width: 90vw
+  }
 
-    body {
-      font-family: "Myriad Pro", Myriad, "Helvetica Neue", Helvetica, Arial, sans-serif
-    }
+  canvas {
+    position: absolute;
+    height: 90%;
+    width: 90%
+  }
 
-    body {
-      margin: 0;
-      padding: 0;
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      background-size: cover;
-      font-style: regular;
-      font-family: "Myriad Pro", Myriad, "Helvetica Neue", Helvetica, Arial, sans-serif;
-      background-color: #121212;
-    }
+  #gameContainer {
+    position: absolute;
+    height: 90%;
+    width: 90%
+  }
 
-    .webgl-content {
-      background: #333
-    }
+  #fullScreenButton,
+  #logoname {
+    height: 35px;
+    width: 35px;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: transparent;
+    background-image: url(../img/fullScreen_on.png);
+    background-size: 35px 35px;
+    border: none;
+    cursor: pointer
+  }
 
-    #errorBrowserBlock,
-    #loadingBlock,
-    .webgl-content {
-      padding: 0;
-      position: absolute;
-      height: 100vh;
-      width: 100vw
-    }
+  #logoname {
+    background-image: url(../img/logo-big.png);
+    left: 15px;
+    bottom: 11px;
+    width: 141px;
+    height: 20px;
+    background-size: 141px 20px
+  }
 
-    canvas {
-      position: absolute;
-      height: 100%;
-      width: 100%
-    }
+  .subtitle {
+    color: #fff;
+    font-size: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    display: block;
+    margin: auto;
+    text-align: center
+  }
 
-    #gameContainer {
-      position: absolute;
-      height: 100%;
-      width: 100%
-    }
+  .logo {
+    display: block;
+    margin: 20px auto;
+    width: 265px;
+    height: 60px
+  }
 
-    #fullScreenButton,
-    #logoname {
-      height: 35px;
-      width: 35px;
-      position: absolute;
-      bottom: 5px;
-      right: 5px;
-      background-color: transparent;
-      background-image: url(../img/fullScreen_on.png);
-      background-size: 35px 35px;
-      border: none;
-      cursor: pointer
-    }
+  .logo-game {
+    height: 150px;
+    width: auto;
+    display: block;
+    margin: auto;
+    margin-top: 5px;
+    border-radius: 20px;
+    box-shadow: 0 20px 20px -10px rgba(0, 0, 0, .3)
+  }
 
-    #logoname {
-      background-image: url(../img/logo-big.png);
-      left: 15px;
-      bottom: 11px;
-      width: 141px;
-      height: 20px;
-      background-size: 141px 20px
-    }
+  #errorBrowserBlock,
+  #loadingBlock {
+    background: #333;
+    background-size: cover;
+    z-index: 1
+  }
 
-    .subtitle {
-      color: #fff;
-      font-size: 15px;
-      padding-bottom: 15px;
-      padding-top: 15px;
-      display: block;
-      margin: auto;
-      text-align: center
-    }
+  .cover {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    opacity: .5;
+    filter: blur(16px)
+  }
 
-    .logo {
-      display: block;
-      margin: 20px auto;
-      width: 265px;
-      height: 60px
-    }
+  #errorContent,
+  #progressBar,
+  #warningBrowserBlock,
+  #warningMobileBlock {
+    height: 25vh;
+    width: 40vw;
+    margin: auto;
+    text-align: center
+  }
 
-    .logo-game {
-      height: 150px;
-      width: auto;
-      display: block;
-      margin: auto;
-      margin-top: 5px;
-      border-radius: 20px;
-      box-shadow: 0 20px 20px -10px rgba(0, 0, 0, .3)
-    }
+  #progressBar {
+    height: 8vh;
+    color: #fff;
+    font-size: 4vh
+  }
 
-    #errorBrowserBlock,
-    #loadingBlock {
-      background: #333;
-      background-size: cover;
-      z-index: 1
-    }
+  #errorContent,
+  #warningBrowserBlock,
+  #warningMobileBlock {
+    margin-top: 15vh;
+    color: #fff;
+    font-size: 2.3vh
+  }
 
-    .cover {
-      position: absolute;
-      z-index: -1;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      -moz-background-size: cover;
-      -webkit-background-size: cover;
-      background-size: cover;
-      opacity: .5;
-      filter: blur(16px)
-    }
+  .browserIcons {
+    display: inline-flex;
+    margin-top: 2vh
+  }
 
-    #errorContent,
-    #progressBar,
-    #warningBrowserBlock,
-    #warningMobileBlock {
-      height: 25vh;
-      width: 40vw;
-      margin: auto;
-      text-align: center
-    }
+  .browserIcons a {
+    width: 150px
+  }
 
-    #progressBar {
-      height: 8vh;
-      color: #fff;
-      font-size: 4vh
-    }
+  #errorContent {
+    font-size: 3vh;
+    margin-top: 5vh
+  }
 
-    #errorContent,
-    #warningBrowserBlock,
-    #warningMobileBlock {
-      margin-top: 15vh;
-      color: #fff;
-      font-size: 2.3vh
-    }
+  .centered {
+    height: 100%;
+    max-width: 770px;
+    margin-left: auto;
+    margin-right: auto
+  }
 
-    .browserIcons {
-      display: inline-flex;
-      margin-top: 2vh
-    }
+  .webgl-content * {
+    border: 0;
+    margin: 0;
+    padding: 0
+  }
 
-    .browserIcons a {
-      width: 150px
-    }
+  .webgl-content {
+    position: absolute;
+    height: 90%;
+    width: 62vh;
+    left: 50%;
+    top: 53%;
+    transform: translate(-50%, -50%);
+  }
 
-    #errorContent {
-      font-size: 3vh;
-      margin-top: 5vh
-    }
+  .progress,
+  .webgl-content .logo {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
+  }
 
-    .centered {
-      height: 100%;
-      max-width: 770px;
-      margin-left: auto;
-      margin-right: auto
-    }
+  .webgl-content .logo {
+    background: url(logo.png) no-repeat center/contain;
+    width: 130px;
+    height: 130px
+  }
 
-    .webgl-content * {
-      border: 0;
-      margin: 0;
-      padding: 0
-    }
+  .webgl-content .progress {
+    height: 18px;
+    width: 141px;
+    margin-top: 90px
+  }
 
-    .webgl-content {
-      height: 100%;
-      width: 62vh;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+  .webgl-content .progress .empty {
+    background: url(TemplateData/progressEmpty.Light.png) no-repeat right/cover;
+    width: 100%;
+    height: 100%;
+    display: inline-block
+  }
 
-    .progress,
-    .webgl-content .logo {
-      position: absolute;
-      left: 50%;
-      top: 45%;
-      -webkit-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%)
-    }
+  .webgl-content .progress .full {
+    background: url(TemplateData/progressFull.Light.png) no-repeat left/cover;
+    width: 0%;
+    height: 100%;
+    display: inline-block
+  }
 
-    .webgl-content .logo {
-      background: url(logo.png) no-repeat center/contain;
-      width: 130px;
-      height: 130px
-    }
+  .webgl-content .logo.Dark {
+    background-image: url(logo.png)
+  }
 
-    .webgl-content .progress {
-      height: 18px;
-      width: 141px;
-      margin-top: 90px
-    }
+  .webgl-content .progress.Dark .empty {
+    background-image: url(TemplateData/progressEmpty.Dark.png)
+  }
 
-    .webgl-content .progress .empty {
-      background: url(TemplateData/progressEmpty.Light.png) no-repeat right/cover;
-      width: 100%;
-      height: 100%;
-      display: inline-block
-    }
+  .webgl-content .progress.Dark .full {
+    background-image: url(TemplateData/progressFull.Dark.png)
+  }
 
-    .webgl-content .progress .full {
-      background: url(TemplateData/progressFull.Light.png) no-repeat left/cover;
-      width: 0%;
-      height: 100%;
-      display: inline-block
-    }
+  .webgl-content .footer {
+    margin-top: 5px;
+    height: 38px;
+    line-height: 38px;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+    font-size: 18px
+  }
 
-    .webgl-content .logo.Dark {
-      background-image: url(logo.png)
-    }
+  .fullscreen,
+  .title,
+  .webgl-content .footer .webgl-logo {
+    height: 100%;
+    display: inline-block;
+    background: transparent center no-repeat
+  }
 
-    .webgl-content .progress.Dark .empty {
-      background-image: url(TemplateData/progressEmpty.Dark.png)
-    }
+  .webgl-content .footer .webgl-logo {
+    background-image: url(TemplateData/webgl-logo.png);
+    width: 204px;
+    float: left
+  }
 
-    .webgl-content .progress.Dark .full {
-      background-image: url(TemplateData/progressFull.Dark.png)
-    }
+  .webgl-content .footer .title {
+    margin-right: 10px;
+    float: right
+  }
 
-    .webgl-content .footer {
-      margin-top: 5px;
-      height: 38px;
-      line-height: 38px;
-      font-family: Helvetica, Verdana, Arial, sans-serif;
-      font-size: 18px
-    }
+  .webgl-content .footer .fullscreen {
+    background-image: url(TemplateData/fullscreen.png);
+    width: 38px;
+    float: right
+  }
 
-    .fullscreen,
-    .title,
-    .webgl-content .footer .webgl-logo {
-      height: 100%;
-      display: inline-block;
-      background: transparent center no-repeat
-    }
+  #links2 {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 8px;
+    list-style: none;
+    background-color: #fff;
+    border-top-left-radius: 5px
+  }
 
-    .webgl-content .footer .webgl-logo {
-      background-image: url(TemplateData/webgl-logo.png);
-      width: 204px;
-      float: left
-    }
+  #links2 ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0
+  }
 
-    .webgl-content .footer .title {
-      margin-right: 10px;
-      float: right
-    }
+  #links2 ul li {
+    display: inline
+  }
 
-    .webgl-content .footer .fullscreen {
-      background-image: url(TemplateData/fullscreen.png);
-      width: 38px;
-      float: right
-    }
+  #links2 ul li a {
+    color: #000;
+    display: inline-block;
+    margin-right: 10px;
+    text-decoration: none
+  }
 
-    body,
-    html {
-      margin: 0 auto;
-      padding: 0 auto;
-      height: 100%;
-      overflow: hidden
-    }
+  #links2 ul li a.visited {
+    color: #000
+  }
 
-    #links2 {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      padding: 8px;
-      list-style: none;
-      background-color: #fff;
-      border-top-left-radius: 5px
-    }
+  #links2 ul li a:hover {
+    opacity: .85
+  }
+</style>
 
-    #links2 ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0
-    }
-
-    #links2 ul li {
-      display: inline
-    }
-
-    #links2 ul li a {
-      color: #000;
-      display: inline-block;
-      margin-right: 10px;
-      text-decoration: none
-    }
-
-    #links2 ul li a.visited {
-      color: #000
-    }
-
-    #links2 ul li a:hover {
-      opacity: .85
-    }
-  </style>
-
-  <script src="TemplateData/UnityProgress.js"></script>
-  <script src="Build/UnityLoader.js"></script>
-  <script>
-    var unityInstance = UnityLoader.instantiate("gameContainer", "Build/BitLife.json", { onProgress: UnityProgress });
-  </script>
-</head>
-
-<body>
-  <div class="webgl-content">
-    <!-- WEBGL GAME IN FULLSCREEN - COPY AND PASTE THIS CSS - IMPORTANT: WIDTH: 100%; HEIGHT:100% -->
-    <div id="gameContainer" style="width: 100%; height: 100%;"></div>
-  </div>
-
-  <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');</style>
-  <h3 class="polarProvided" style="font-weight: 500; font-family: 'Inter', sans-serif; font-optical-sizing: auto; font-style: normal; font-variation-settings: 'slnt' 0; position: fixed; bottom: 24px; left: 24px; color: white; box-sizing: border-box; padding: 8px; margin: 0; background-color: #363636; border-radius: 8px; text-align: center;">Provided by <font color="7777FF"><b>Polar</b></font><br><a style="color: #FF7777;" href="/"><font size="2">Go Home</font></a></h3>
-</body>
-
-</html>
+<div class="webgl-content">
+  <!-- WEBGL GAME IN FULLSCREEN - COPY AND PASTE THIS CSS - IMPORTANT: WIDTH: 100%; HEIGHT:100% -->
+  <div id="gameContainer" style="width: 100%; height: 100%;"></div>
+</div>

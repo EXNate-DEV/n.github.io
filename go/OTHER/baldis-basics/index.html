@@ -1,46 +1,62 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Google Drive</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  </head>
-  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
-    <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width: 960px; height: 600px; background: #121212"></canvas>
-    <script src="/go/OTHER/baldis-basics/Build/bld.loader.js"></script>
-    <script src="/js/LivechatBackground.js"></script>
-    <script>
-      if (true) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
+<div class="page-script" data-type="">/go/OTHER/baldis-basics/Build/bld.loader.js</div>
+<div class="page-script" data-type="">/go/OTHER/baldis-basics/rtup.js</div>
 
-        var canvas = document.querySelector("#unity-canvas");
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        canvas.style.position = "fixed";
+<style type="text/css">
+  h1 {
+    color: white;
+  }
+  #bloctxt {
+    border-left-width: 5px;
+    border-left-style: solid;
+    border-left-color: #962300;
+    padding-left: 10px;
+    position: absolute;
+    top:5%;
+    left: 50%;
+    width: 600px;
+    margin-left: -260px
+  }
+  b {
+    color: #CCCCCC
+  }
+  #wrapper {
+    padding: 10px;
+    margin: 0 auto;
+  }
+  #border {
+    background-color: transparent;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    margin: 0 auto;
+    padding: 5px;
+    width:1280px;
+    height:720px;
 
-        document.body.style.textAlign = "left";
+  }
 
-        window.gameCanvas = canvas
-        window.mediaStream = canvas.captureStream(60)
-      }
+  #canvas {
+    width:1280px;
+    height:720px;
+  }
 
-      createUnityInstance(document.querySelector("#unity-canvas"), {
-        arguments: [],
-        dataUrl: "/go/OTHER/baldis-basics/Build/bld.data",
-        frameworkUrl: "/go/OTHER/baldis-basics/Build/bld.framework.js",
-        codeUrl: "/go/OTHER/baldis-basics/Build/bld.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "Baldi's Basics Classic",
-        productVersion: "1.4.3",
-        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-      });
-    </script>
-  </body>
-</html>
+  #MMFCanvas {
+    border-radius: 5px;
+  }
+</style>
+
+<div>
+  <div id="wrapper">
+    <div id="border">
+      <div id="canvas">
+        <canvas id="MMFCanvas-baldisbasics" width="1280" height="720">
+          <p>Your browser does not support Canvas.</p>
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="page-buttons">
+  <button class="btn btn-outline-secondary" onclick="document.getElementById('canvas').requestFullscreen({navigationUI: 'hide'})">Fullscreen</button>
+</div>

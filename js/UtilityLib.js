@@ -205,7 +205,7 @@ export class Popup {
      */
     Show(Instant) {
         let e = document.createElement("span");
-        e.style = "--js-opacity: 0%; width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #00000077; z-index: 4; opacity: var(--js-opacity); transition: all 0.5s ease-in-out;"
+        e.style = "--js-opacity: 0%; width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: #0000007F; z-index: 4; opacity: var(--js-opacity); transition: all 0.5s ease-in-out;"
 
         if (Instant) {
             e.style.transition = "all 0s";
@@ -230,7 +230,7 @@ export class Popup {
         document.body.appendChild(e);
         requestAnimationFrame(function () {
             e.style.backdropFilter = "blur(8px)";
-            e.style.opacity = 1;
+            e.style.opacity = "100%";
         });
     }
 }

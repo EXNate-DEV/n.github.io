@@ -1,0 +1,1 @@
+var unityInstance = UnityLoader.instantiate("gameContainer", "/go/OTHER/bitlife/Build/BitLife.json", { onProgress: UnityProgress });

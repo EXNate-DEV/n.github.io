@@ -42,7 +42,7 @@
 		return n.d(e, "a", e), e
 	}, n.o = function(t, e) {
 		return Object.prototype.hasOwnProperty.call(t, e)
-	}, n.p = "", n(n.s = 184)
+	}, n.p = "go/OTHER/stickman-hook/", n(n.s = 184)
 }([function(t, e, n) {
 	var A = n(18),
 		r = n(8);

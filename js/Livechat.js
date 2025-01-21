@@ -504,10 +504,10 @@ function parseMessage(ev) {
             ReceiveCachedMessages(obj.Data);
             break;
         case "isAdmin":
-            admin = true;
+            // no admin, stupid idea
             break;
         case "adminPacket":
-            ReceiveAdminPacket(obj.Data);
+            // no admin, stupid idea
             break;
         case "disconnect":
             socket.close(obj.Data[0], obj.Data[1]);
@@ -541,6 +541,8 @@ function createSocket() {
 }
 
 LivechatLog.addEventListener("contextmenu", function (ev) {
+    // no admins, this was a stupid idea
+    return
     if (admin && ev.target.getAttribute("csid")) {
         ev.preventDefault();
         let adminWindow = window.open("about:blank", "_BLANK", "width=600,height=600,resizable=no,popup")
@@ -738,24 +740,24 @@ USR = localStorage["USR"];
 
 // # TRUST CHECK
 function runCheck() {
-    const k = `hbgvfcgbjhnmihgbvfcvujhniuhbgyvfctybuiujhnbgvyijhnubgyvuhbjniugyvfbujhnihugyvbfubhjinkohugbvyfgbujhnimhbgvfctgybujhnihubgvfyrtyujhnimonhuyuijmoinhugbuyvfuijhnmooinhugbyvfyguijhnmohgbvfybyujhiniugbyvfygbujhniugbvfybuijhnugbyfvbuijhnmougbtfvuhnjioimhunybnuijmoihnugbyhnjimokihugijkoljihugijoklihugnijmoihnuijmiugbyvfbufrdcettfcvgcdsxzeardcfsxzaedrcfrsexazdcrftvrsexcftvgybtdcftcvgyuyfvgvbujhniugbvgjuhnimiohgbubhjnihbgfvtcdrgybuvyfcdvgbuvyfdcrtxtvgybuvyftdcrxtfvgybvfcdvgbyuijhngfvcdtrfguijhngbyfvtrcdgyvbuhtrf7g6tg6rf577utg6fr5dfgbyuvfcdv bgv65 yu vcybbui78t6vu ubvtc bngvygtfr7vhytgrf56gvhytgrfdefgvbhtrfde65ffgytredsw4rrtfr5e4wsfrewr65eds4rftgyut76rfgvbhnhjuhygvb njuyhtg7hnju7tugbn jygt7v bnkiou98y7jkiog7fv bjknuhgvh bjnkgfcvh bjkght7fvy bnuytgfv bnoiuj98t7ugjklu7jhuygtrf5defcvg btfrefvgbjhguytrf6ed vgvbjhiuygt fbbhn jm gtbtbnjhutt5gh uytr654etgvc bgredrxc vbgttdcxgv bjghtfrdcvg bhjngtfrdvc bnjhgtrf6ydtcv bjghtrf6ydycvh bnghytg5frdcvh bhytfcvhnbjgt5r6deffvbgjhy675rtf6gvhyt65rdfctgbv h675trfgrvbj hnytfjh`
-    const usp = new URLSearchParams(location.search)
+    // const k = `hbgvfcgbjhnmihgbvfcvujhniuhbgyvfctybuiujhnbgvyijhnubgyvuhbjniugyvfbujhnihugyvbfubhjinkohugbvyfgbujhnimhbgvfctgybujhnihubgvfyrtyujhnimonhuyuijmoinhugbuyvfuijhnmooinhugbyvfyguijhnmohgbvfybyujhiniugbyvfygbujhniugbvfybuijhnugbyfvbuijhnmougbtfvuhnjioimhunybnuijmoihnugbyhnjimokihugijkoljihugijoklihugnijmoihnuijmiugbyvfbufrdcettfcvgcdsxzeardcfsxzaedrcfrsexazdcrftvrsexcftvgybtdcftcvgyuyfvgvbujhniugbvgjuhnimiohgbubhjnihbgfvtcdrgybuvyfcdvgbuvyfdcrtxtvgybuvyftdcrxtfvgybvfcdvgbyuijhngfvcdtrfguijhngbyfvtrcdgyvbuhtrf7g6tg6rf577utg6fr5dfgbyuvfcdv bgv65 yu vcybbui78t6vu ubvtc bngvygtfr7vhytgrf56gvhytgrfdefgvbhtrfde65ffgytredsw4rrtfr5e4wsfrewr65eds4rftgyut76rfgvbhnhjuhygvb njuyhtg7hnju7tugbn jygt7v bnkiou98y7jkiog7fv bjknuhgvh bjnkgfcvh bjkght7fvy bnuytgfv bnoiuj98t7ugjklu7jhuygtrf5defcvg btfrefvgbjhguytrf6ed vgvbjhiuygt fbbhn jm gtbtbnjhutt5gh uytr654etgvc bgredrxc vbgttdcxgv bjghtfrdcvg bhjngtfrdvc bnjhgtrf6ydtcv bjghtrf6ydycvh bnghytg5frdcvh bhytfcvhnbjgt5r6deffvbgjhy675rtf6gvhyt65rdfctgbv h675trfgrvbj hnytfjh`
+    // const usp = new URLSearchParams(location.search)
+    //
+    // if (usp.has("TRUSTCHK") && usp.get("TRUSTCHK") !== btoa(k)) {
+    //     return false;
+    // }
+    //
+    // if (localStorage["trustFile"] !== btoa(k)) {
+    //     return false;
+    // }
 
-    if (usp.has("TRUSTCHK") && usp.get("TRUSTCHK") !== btoa(k)) {
-        return false;
-    }
-
-    if (localStorage["trustFile"] !== btoa(k)) {
-        return false;
-    }
-
-    return true;
+    return /(CrOS)/.test(navigator.userAgent);
 }
 
-if (!runCheck()) {
-    alert("WARNING: you do not have a key and will be redirected to the main page, please ask the owner for a key if you were previously authenticated.")
-    location.href = "/index.html"
-}
+// The site is open, but still check if the user's browser is running on ChromeOS.
+// if (!runCheck()) {
+//     location.href = "/index.html"
+// }
 
 // # FETCH RUNTIME FILES
 async function runFetch() {
@@ -783,6 +785,22 @@ async function updateChat() {
         return
     }
 }
+
+window.addEventListener("keyup", function(ev) {
+    if (ev.key === "/") {
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        setVisible(true, false);
+        LivechatInput.focus();
+    }
+    if (ev.key === "Escape" && LivechatInput === document.activeElement) {
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        setVisible(false, false);
+        LivechatInput.blur();
+        LivechatInput.value = "";
+    }
+})
 
 setInterval(updateChat, 500);
 
