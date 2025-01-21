@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b3f491-2e00-4188-b570-4012e9844e9b" name="Changes" comment="">
+    <list default="true" id="d5b3f491-2e00-4188-b570-4012e9844e9b" name="Changes" comment="working on the distribution script">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/main.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +110,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-WS-243.22562.222" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.120" />
       </set>
     </attachedChunks>
   </component>
@@ -126,7 +129,25 @@
       <workItem from="1736901370841" duration="3000" />
       <workItem from="1736901388637" duration="7550000" />
       <workItem from="1737070415967" duration="84057000" />
+      <workItem from="1737472535681" duration="1090000" />
     </task>
+    <task id="LOCAL-00001" summary="Update everything before updating assets.epw (so the rollback isn't as bad this time)">
+      <option name="closed" value="true" />
+      <created>1737422828490</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1737422828491</updated>
+    </task>
+    <task id="LOCAL-00002" summary="working on the distribution script">
+      <option name="closed" value="true" />
+      <created>1737426357828</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1737426357828</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,5 +163,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update everything before updating assets.epw (so the rollback isn't as bad this time)" />
+    <MESSAGE value="working on the distribution script" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on the distribution script" />
   </component>
 </project>
