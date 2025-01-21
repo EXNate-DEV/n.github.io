@@ -3,7 +3,7 @@ import { Prompt, Popup } from "./UtilityLib.js"
 let Games = {
     Bitlife: () => {
         new Prompt("<font color='#FF7777'>Game Warning</font>", "This game contains inappropriate content, are you sure you want to play this game?", true, 2).Show().then(function() {
-            PagesAPI.changePage('/go/OTHER/bitlife/index.html')
+            PagesAPI.changePage('/go/OTHER/bitlife/index.html', {newTab: true})
         })
     },
     DOOM_1993: () => {
@@ -20,7 +20,7 @@ let Games = {
         new Prompt("<font color='#FF7777'>Notice</font>", "This software doesn't run properly.", false, 3).Show()
     },
     HL1: () => {
-        PagesAPI.changePage('/go/CLASSIC/hl1/index.html')
+        PagesAPI.changePage('/go/CLASSIC/hl1/index.html', {newTab: true})
     },
     Minecraft: () => {
         PagesAPI.changePage('/go/OTHER/minecraft/index.html', {newTab: true})

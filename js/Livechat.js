@@ -33,6 +33,9 @@ let enabled = {}
 
 window.LiveAPI = {
     registerSocketOpenEvent: function(callback) {
+        if (window.socket.readyState === WebSocket.OPEN) {
+            callback()
+        }
         oe.push(callback)
     },
     registerPeerEvent: function(event, callback) {
@@ -61,6 +64,13 @@ window.LiveAPI = {
     },
     SetMessageEnabled: function (message, enable) {
         enabled[message] = enable
+    },
+    watchBroadcast: function (csid) {
+        const srch = new URLSearchParams();
+        srch.set("csid", csid);
+        PagesAPI.changePage("/broadcast/index.html", {
+            searchParams: srch,
+        });
     }
 }
 
@@ -262,7 +272,7 @@ function ReceiveMessage(MSG) {
     let message = Message.Deserialize(MSG);
     if (message.Content != null) {
         if (message.Type == 1) {
-            LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container">${message.Username}</font> started a stream</p> [<a class="livechat-text-container" href="/broadcast/?csid=${encodeURIComponent(message.Id)}">Watch</a>]<br /><br />`;
+            LivechatLog.innerHTML += `<font color="#CCCCCC"><p class="livechat-text-container">${message.Username}</font> started a stream</p> [<a class="livechat-text-container" href="javascript:LiveAPI.watchBroadcast('${message.Id}')">Watch</a>]<br /><br />`;
         } else {
             if (message.Id == "sys-reserved") {
                 LivechatLog.innerHTML += `<font color="#FF7711"><p class="livechat-text-container">Livechat Server</p></font> ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
@@ -292,7 +302,7 @@ function QueueMessage(MSG) {
     let message = Message.Deserialize(MSG);
     if (message.Content != null) {
         if (message.Type == 1) {
-            queue += `<font color="#CCCCCC"><p class="livechat-text-container" csid="${message.Id}">${message.Username}</font> started a stream</p> <a class="livechat-text-container" href="/broadcast/?csid=${encodeURIComponent(message.Id)}">Watch</a><br /><br />`;
+            queue += `<font color="#CCCCCC"><p class="livechat-text-container" csid="${message.Id}">${message.Username}</font> started a stream</p> <a class="livechat-text-container" href="javascript:LiveAPI.watchBroadcast('${message.Id}')">Watch</a><br /><br />`;
         } else {
             if (message.Id == "sys-reserved") {
                 queue += `<font color="#FF7711"><p class="livechat-text-container" csid="${message.Id}" mid="${message.messageId}">Livechat Server</p></font> ${DOMPurify.sanitize(marked.parse(message.Content))}<br /><br />`;
@@ -388,7 +398,8 @@ async function ReceiveWebRTCC(data) {
     switch (data.evType) {
         case "open": {
             if (peerConnections[sender]) {
-                return
+                peerConnections[sender].close()
+                delete peerConnections[sender];
             }
             peerConnections[sender] = new RTCPeerConnection({
                 iceServers: [

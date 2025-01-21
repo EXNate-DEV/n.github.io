@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dist": "node main.mjs --dist",
+    "dist": "node main.mjs --dist -o",
     "dev": "node Server.mjs",
     "obfuscate-index": "javascript-obfuscator ./js/0bf.js --output ./js/obf3.js --string-array true --split-strings true --dead-code-injection true --dead-code-injection-threshold 10000 --target browser --unicode-escape-sequence true --numbers-to-expressions true --self-defending true",
     "obfuscate-livechat": "javascript-obfuscator ./js/LivechatV3.js --output ./js/Livechat.js --string-array true --split-strings true --dead-code-injection true --dead-code-injection-threshold 10000 --target browser"

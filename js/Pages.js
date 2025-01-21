@@ -57,10 +57,13 @@ function dynamic_loadScript(scriptSRC, type) {
 }
 
 async function changePage(url, options = null) {
+    url = decodeURIComponent(url);
+    const search = new URLSearchParams(window.location.search);
+    search.set("page", encodeURIComponent(url));
     if (options) {
         if ("newTab" in options && options.newTab) {
             LiveAPI.SetMessageEnabled("disconnect", false);
-            const w2 = window.open("/app.html?" + url, "_blank");
+            const w2 = window.open("/app.html?" + search.toString(), "_blank");
             let changed = false;
             w2.window.onload = function() {
                 changed = false
@@ -82,6 +85,9 @@ async function changePage(url, options = null) {
             w2.window.onclose = function() {
                 LiveAPI.SetMessageEnabled("disconnect", true);
             }
+            w2.window.addEventListener("beforeunload", function() {
+                w2.close();
+            });
             window.addEventListener("beforeunload", function() {
                 if (w2) {
                     w2.close()
@@ -93,6 +99,14 @@ async function changePage(url, options = null) {
                 }
             })
             return;
+        }
+        if ("searchParams" in options) {
+            if (typeof options.searchParams === "string") {
+                options.searchParams = new URLSearchParams(options.searchParams);
+            }
+            options.searchParams.forEach((value, key) => {
+                search.set(key, encodeURIComponent(value));
+            })
         }
     }
     beforeUnload.forEach((cb) => {
@@ -128,8 +142,7 @@ async function changePage(url, options = null) {
         }
         pageKeep.remove();
     }
-    history.pushState(null, "", "/app.html?" + url);
-    console.log(location.search.substring(1))
+    history.pushState(null, "", "/app.html?" + search.toString());
     currentPage = url
     const pageScripts = document.getElementsByClassName("page-script")
     for (let key1 in pageScripts) {
@@ -183,9 +196,5 @@ function createActivity() {
 }
 
 init("/js/Security/PolarSecurity_bg.wasm").then(function() {
-    if (location.search) {
-        PagesAPI.changePage(location.search.substring(1));
-        return;
-    }
-    PagesAPI.changePage("/home.html");
+    PagesAPI.changePage(new URLSearchParams(window.location.search).get("page") || "/home.html");
 })

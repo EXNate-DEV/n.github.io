@@ -21,7 +21,7 @@ if (opts.dist) {
     await fs.cp(__dirname, path.join(__dirname, "..", "dist"), {
         recursive: true
     });
-    console.log("Copied to ./dist");
+    console.log("Copied to ../dist");
     for await (const entry of fs.glob("**/*.@(html|js)", {
         cwd: path.join(__dirname, "..", "dist")
     })) {
@@ -30,8 +30,9 @@ if (opts.dist) {
         }
         if (entry.endsWith(".js") && opts.obfuscate) {
             console.log(`Obfuscating file: ${entry}`);
-            let buffer = await fs.readFile(path.join(__dirname, "..", "dist", entry), "utf8");
+            let buffer = await fs.readFile(path.join(__dirname, "..", "dist", entry), "utf-8");
             buffer = JavaScriptObfuscator.obfuscate(buffer, {selfDefending: true, deadCodeInjection: true, deadCodeInjectionThreshold: 1});
+            await fs.writeFile(path.join(__dirname, "..", "dist", entry), buffer.getObfuscatedCode());
         }
         if (entry.endsWith(".html")) {
             console.log(`Encoding file: ${entry}`);
