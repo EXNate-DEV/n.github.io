@@ -22,6 +22,7 @@ if (opts.dist) {
         recursive: true
     });
     console.log("Copied to ../dist");
+    const startTime = new Date().getTime();
     for await (const entry of fs.glob("**/*.@(html|js)", {
         cwd: path.join(__dirname, "..", "dist")
     })) {
@@ -41,5 +42,5 @@ if (opts.dist) {
             await fs.writeFile(path.join(__dirname, "..", "dist", entry), buffer);
         }
     }
-    console.log("Encoded all files.");
+    console.log(`Encoded all files. Took ${(new Date().getTime() - startTime) / 1000} seconds.`);
 }
